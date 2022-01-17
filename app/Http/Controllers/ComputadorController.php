@@ -18,7 +18,7 @@ class ComputadorController extends Controller
     public function index()
     {
 
-        $data=Computador::with('oficinas')->with('encargado')->with('tipo_usos')->with('comentarios')->get();
+        $data=Computador::with('oficinas')->with('encargado')->with('tipo_usos')->with('comentarios')->paginate(5);
         //$data=Computador::with('oficinas')->with('encargado')->get();
         
         return view('relaciones.index')->with('data',$data);
@@ -57,6 +57,8 @@ class ComputadorController extends Controller
     public function show($id)
     {
         //
+        $computer=Computer::find($id);
+        return view('relaciones.edit')->with('computer',$computer);
     }
 
     /**
