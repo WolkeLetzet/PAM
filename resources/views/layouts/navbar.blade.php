@@ -17,7 +17,11 @@
   <!-- As a heading -->
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1">Navbar</span>
+    </div>
+    <div>
+      <span>
+        <a href="{{route('create')}}" class="navbar-brand mb-0 h1">Agregar</a>
+      </span>
     </div>
   </nav>
   </header>

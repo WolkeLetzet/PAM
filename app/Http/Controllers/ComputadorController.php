@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Computador;
 use \App\Models\Oficina;
+use App\Models\Comentario;
+
 
 class ComputadorController extends Controller
 {
@@ -30,9 +32,9 @@ class ComputadorController extends Controller
     public function create()
     {
         //
-        $marcas = ['Apple', 'Dell', 'HP', 'Lenovo', 'Asus', 'Acer', 'Toshiba', 'Samsung', 'LG', 'MSI'];
+        
         $oficinas = Oficina::all();
-        return view('relaciones.create')->with('marcas',$marcas)->with('oficinas',$oficinas);
+        return view('relaciones.create')->with('oficinas',$oficinas);
     }
 
     /**
@@ -66,7 +68,10 @@ class ComputadorController extends Controller
     public function edit($id)
     {
         //
-        return view('relaciones.edit');
+        $computador=Computador::find($id);
+        $oficinas = Oficina::all();
+        
+        return view('relaciones.edit')->with('computer',$computador)->with('oficinas',$oficinas);
     }
 
     /**

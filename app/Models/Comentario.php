@@ -14,7 +14,7 @@ class Comentario extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function computador(): BelongsTo
     {
         return $this->belongsTo(Computador::class);
     }

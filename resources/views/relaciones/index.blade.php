@@ -76,8 +76,8 @@
 
                     @endif
             <th>
-                <a href="{{route('create',)}}" class="btn btn-primary">Agregar</a>
-                <a href="{{url('/comp/'.$item->id.'/edit/')}}" class= "btn btn-primary">Editar</a>
+                
+                <a href="{{url('/comp/'.$item->id.'/edit/')}}" class= "btn btn-secondary">Editar</a>
                 <form action="" method="post">
                     @csrf
                     <input type="submit" value="Eliminar" class="btn btn-danger">

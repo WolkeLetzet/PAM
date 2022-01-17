@@ -16,10 +16,10 @@ class OficinaSeeder extends Seeder
     public function run()
     {
         //
-        $oficinas = [ 'DOM', 'Adquisiciones', 'Archivo Filmico', 'Control','Tesoreria','Ventanilla de obras','SSMM','Consejales','Servicios Generales','Aseo','Licencia'];
-        for ($i=0; $i < 10; $i++) { 
+        $oficinas = [ 'DOM', 'Adquisiciones', 'Archivo Filmico', 'Control','Tesoreria','Ventanilla de obras','SSMM','Consejales','Servicios Generales','Aseo','Licencia','Administracion','Rentas','Patrimonio','Discapacidad'.'SECPLA','OMIL','Unidad de Obras Menores'];
+        for ($i=0; $i < count($oficinas); $i++) { 
             DB::table('oficinas')->insert([
-                'nombre' => $oficinas[rand(0,9)],
+                'nombre'=> $oficinas[$i]
                 
             ]);
         }

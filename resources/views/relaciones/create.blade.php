@@ -1,6 +1,7 @@
 @extends('layouts.navbar')
 
 @section('create-form')
+
     <div class="">
         <form action="" method="post">
             @csrf
@@ -12,14 +13,9 @@
                 <label for="modelo">Email</label>
                 <input type="tex" class="form-control" id="modelo" name="modelo" placeholder="Enter email">
             </div>
-            <div>
+            <div class=" form-group">
                 <label for="marca">Marca</label>
-                <select name="marca" id="marca" class="form-control">
-                    <option value="">Seleccione una marca</option>
-                    @for($i = 0; $i < count($marcas); $i++)
-                        <option value="{{$i}}">{{$marcas[$i]}}</option>
-                    @endfor
-                </select>
+               <input type="text" name="marca" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
