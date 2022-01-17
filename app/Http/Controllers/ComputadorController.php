@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Computador;
 use \App\Models\Oficina;
 use App\Models\Comentario;
-
+use App\Models\TipoUso;
 
 class ComputadorController extends Controller
 {
@@ -70,8 +70,9 @@ class ComputadorController extends Controller
         //
         $computador=Computador::find($id);
         $oficinas = Oficina::all();
+        $tipo_usos= TipoUso::all();
         
-        return view('relaciones.edit')->with('computer',$computador)->with('oficinas',$oficinas);
+        return view('relaciones.edit')->with('computer',$computador)->with('oficinas',$oficinas)->with('tipo_usos',$tipo_usos);
     }
 
     /**
