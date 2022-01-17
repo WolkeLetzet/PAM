@@ -1,0 +1,13 @@
+.choice{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+
+}
+body{
+    background-color: gray;
+}
+.choice img{
+    width: 200px;
+}
