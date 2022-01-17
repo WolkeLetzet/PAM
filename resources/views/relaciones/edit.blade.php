@@ -27,10 +27,10 @@
                         @if (!empty($computer->oficinas))
                             @foreach ($computer->oficinas as $c_oficina)
 
-                                @if ($oficina->id != $c_oficina->id)
-                                    <input type="checkbox" class="form-check-input" name="oficinas" id="oficina{{$oficina->id}}" value="{{$oficina->id}}">                            
+                                @if ($oficina->id == $c_oficina->id)
+                                    <input type="checkbox" class="form-check-input" name="oficinas" id="oficina{{$oficina->id}}" value="{{$oficina->id}}" checked>                           
                                 @else
-                                    <input type="checkbox" class="form-check-input" name="oficinas" id="oficina{{$oficina->id}}" value="{{$oficina->id}}" checked>
+                                    <input type="checkbox" class="form-check-input" name="oficinas" id="oficina{{$oficina->id}}" value="{{$oficina->id}}"> 
                                 @endif
                                 
                             @endforeach
