@@ -53,11 +53,11 @@
             </div>
 
 
-            <div class="mb-3">
+            <div class="mb-3 ">
                 <div class="input-group">
-                    <span onclick="agregarOtroComentario()" class="input-group-text btn btn-primary" style="display: flex; align-items: center"><i class="bi bi-plus" style="font-size: 30px"></i> </span>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
-                  </div>
+                    <span onclick="agregarOtroComentario()" class="input-group-text" style="display: flex; align-items: center"><i class="bi bi-question-lg" style="font-size: 30px"></i> </span>
+                    <textarea class="form-control" aria-label="Comentario">{{$computer->comentarios->comentario}}</textarea>
+                </div>
             </div>
 
 
@@ -67,12 +67,12 @@
 
         </form>
         
+        
     </div>
 
     <script>
-        function agregarOtroComentario(){
-            console.log('Hola');
-        }
+
+        
     </script>
 
    

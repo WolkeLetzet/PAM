@@ -9,11 +9,10 @@
                 <th>ID PC</th>
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th>ID Oficina</th>
+             
                 <th>Oficina</th>
-                <th>ID Usuario</th>
+
                 <th>Usuario</th>
-                <th>ID Tipo de Uso</th>  
                 <th>Tipo de Uso</th>
                 <th>Comentarios</th>
             </tr>
@@ -26,36 +25,22 @@
                     <td>{{$item->modelo}}</td>
                     @if ($item->oficinas->first() == null)
                         <td>No tiene oficina asignada</td>
-                        <td>No tiene oficina asignada</td>
+
                     @else
-                        <td>
-                        @foreach ($item->oficinas as $oficina)
-                            {{$oficina->id}};
-                    
-                            
-                        @endforeach
-                        </td>
+ 
                         <td>
                         @foreach ($item->oficinas as $oficina)
                             {{$oficina->nombre}};                           
                         @endforeach
                         </td>
 
-                    @endif
-                    <td>{{$item->encargado->id}}</td>     
+                    @endif  
                     <td>{{$item->encargado->nombre}}</td>   
                     
                     @if ($item->tipo_usos->first() == null)
-                        <td>No tiene tipo de uso asignado</td>
+
                         <td>No tiene tipo de uso asignado</td>
                     @else
-                        <td>
-                        @foreach ($item->tipo_usos as $tipo_uso)
-                            {{$tipo_uso->id}};
-                    
-                            
-                        @endforeach
-                        </td>
                         <td>
                         @foreach ($item->tipo_usos as $tipo_uso)
                             {{$tipo_uso->nombre}};                           
@@ -91,5 +76,9 @@
             
         </tbody>
     </table>
+    <div>
+        
+    </div>
+    
 
 @endsection
