@@ -18,7 +18,7 @@ class OficinaSeeder extends Seeder
     public function run()
     {
         //
-        $oficinas = [ 'DOM', 'Adquisiciones', 'Archivo Filmico', 'Control','Tesoreria','Ventanilla de obras','SSMM','Consejales','Servicios Generales','Aseo','Licencia','Administracion','Rentas','Patrimonio','Discapacidad'.'SECPLA','OMIL','Unidad de Obras Menores'];
+        $oficinas = [ 'DOM', 'Adquisiciones', 'Archivo Filmico', 'Control','Tesoreria','Ventanilla de obras','SSMM','Consejales','Servicios Generales','Aseo','Licencia','Administracion','Rentas','Patrimonio','Discapacidad','SECPLA','OMIL','Unidad de Obras Menores'];
 
         $fecha=Carbon::now()->format('Y-m-d H:i:s');
         for ($i=0; $i < count($oficinas); $i++) { 

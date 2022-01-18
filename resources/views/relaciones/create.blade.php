@@ -5,6 +5,7 @@
 <div class="container-sm">
        
     <form action="" method="post">
+        @csrf
 
 
         <div class="mb-3">
@@ -19,13 +20,19 @@
             <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" value="">
             <small id="helpId" class="form-text text-muted">Modelo del Computador</small>
         </div>
+        <div class="mb-3">
+            <label for="encargado" class="form-label">Encargado</label>
+            <input type="text" class="form-control" name="encargado" id="encargado" placeholder="Encargado" value="">
+            <small id="helpId" class="form-text text-muted">Encargado del Computador</small>
+        </div>
 
         <div class="mb-3">
+            
             @foreach ($oficinas as $oficina)
                 
                 <div class="form-check">
 
-                    <input class="form-check-input" type="checkbox" name="oficinas" id="oficina{{$oficina->id}}">
+                    <input class="form-check-input" type="checkbox" name="oficinas" id="oficina{{$oficina->id}}" value="{{$oficina->id}}">
                     
                     <label for="oficina{{$oficina->id}}" class="form-check-label">
                         {{$oficina->nombre}}

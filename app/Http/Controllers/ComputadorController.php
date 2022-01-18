@@ -57,9 +57,8 @@ class ComputadorController extends Controller
      */
     public function show($id)
     {
-        //
         $computer=Computador::find($id);
-        return view('relaciones.edit')->with('computer',$computer);
+        return view('relaciones.show')->with('computer',$computer);
     }
 
     /**

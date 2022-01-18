@@ -35,6 +35,8 @@
       @yield('create-form')
 
       @yield('edit-form')
+
+      @yield('show-computer')
     </div>
     
 

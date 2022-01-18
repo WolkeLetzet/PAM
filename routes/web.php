@@ -23,9 +23,9 @@ Route::get('/', function () {
 Route::resource('comp',ComputadorController::class);
 
 Route::namespace('App\Http\Controllers')->group(function(){
-    Route::get('comp/create', 'ComputadorController@create')->name('create');
-    Route::get('comp/edit/{$id}', 'ComputadorController@edit')->name('edit');
-    Route::get('comp/show/{$id}', 'ComputadorController@show')->name('show');
+    Route::get('comp/create',     'ComputadorController@create')->name('create');
+    Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
+    Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
 });
 
 

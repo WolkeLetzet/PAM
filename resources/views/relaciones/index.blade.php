@@ -35,7 +35,12 @@
                         </td>
 
                     @endif  
-                    <td>{{$item->encargado->nombre}}</td>   
+                    @if ($item->encargado !=null)
+                        <td>{{$item->encargado->nombre}}</td>  
+                    @else
+                        <td>No tiene encargado</td>
+                    @endif
+                     
                     
                     @if ($item->tipo_usos->first() == null)
 
@@ -51,7 +56,7 @@
  
             <th>
                 
-                <a href="{{url('/comp/'.$item->id)}}" class= "btn btn-secondary">Ver</a>
+                <a href="{{url('/comp/show/'.$item->id)}}" class= "btn btn-secondary">Ver</a>
             
             </th>
 

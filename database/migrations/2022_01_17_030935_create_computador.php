@@ -17,6 +17,7 @@ class CreateComputador extends Migration
             $table->id();
             $table->string('marca');
             $table->string('modelo');
+            
             $table->unsignedBigInteger('encargado_id')->nullable();
             $table->timestamps();
 
