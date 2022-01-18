@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Encargado;
 
 class ComputadorFactory extends Factory
 {
@@ -16,11 +17,12 @@ class ComputadorFactory extends Factory
     {
         //
         $marcas = ['Apple', 'Dell', 'HP', 'Lenovo', 'Asus', 'Acer', 'Toshiba', 'Samsung', 'LG', 'MSI'];
+        
         return [
             //
             'marca' => $marcas[rand(0,9)],
             'modelo' => $this->faker->word,
-            'encargado_id' => rand(1,10),
+            'encargado_id' =>Encargado::factory()->create()->id,
             
 
         ];

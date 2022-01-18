@@ -48,25 +48,10 @@
                         </td>
                     @endif
 
-                    @if ($item->comentarios->first() == null)
-                        <td> </td>
-
-                    @else
-
-                        <td>
-                        @foreach ($item->comentarios as $comentario)
-                            {{$comentario->comentario}};                           
-                        @endforeach
-                        </td>
-
-                    @endif
+ 
             <th>
                 
-                <a href="{{url('/comp/'.$item->id.'/edit/')}}" class= "btn btn-secondary">Editar</a>
-                <form action="" method="post">
-                    @csrf
-                    <input type="submit" value="Eliminar" class="btn btn-danger">
-                </form>
+                <a href="{{url('/comp/'.$item->id)}}" class= "btn btn-secondary">Ver</a>
             
             </th>
 
@@ -77,7 +62,7 @@
         </tbody>
     </table>
     <div>
-        
+        {{$data->links()}}
     </div>
     
 

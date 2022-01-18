@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ComentarioFactory extends Factory
+class OficinaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +15,7 @@ class ComentarioFactory extends Factory
     {
         return [
             //
-            
-            'comentario' => $this->faker->sentence,
+ 
         ];
     }
 }

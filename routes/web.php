@@ -22,9 +22,13 @@ Route::get('/', function () {
 });
 Route::resource('comp',ComputadorController::class);
 
-Route::get('comp/create', 'App\Http\Controllers\ComputadorController@create')->name('create');
-Route::get('comp/{id}/edit', 'App\Http\Controllers\ComputadorController@edit')->name('edit');
-Route::get('comp/{id}', 'App\Http\Controllers\ComputadorController@edit');
+Route::namespace('App\Http\Controllers')->group(function(){
+    Route::get('comp/create', 'ComputadorController@create')->name('create');
+    Route::get('comp/edit/{$id}', 'ComputadorController@edit')->name('edit');
+    Route::get('comp/show/{$id}', 'ComputadorController@show')->name('show');
+});
+
+
 
 
 

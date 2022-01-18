@@ -21,7 +21,7 @@
             </div>
 
             <div class="mb-3">
-                @foreach ($oficinas as $oficina )
+                @foreach ($oficinas as $oficina)
                     
                     <div class="form-check">
 

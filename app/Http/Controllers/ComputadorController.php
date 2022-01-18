@@ -34,7 +34,8 @@ class ComputadorController extends Controller
         //
         
         $oficinas = Oficina::all();
-        return view('relaciones.create')->with('oficinas',$oficinas);
+        $tipo_usos= TipoUso::all();
+        return view('relaciones.create')->with('oficinas',$oficinas)->with('tipo_usos',$tipo_usos);
     }
 
     /**
@@ -57,7 +58,7 @@ class ComputadorController extends Controller
     public function show($id)
     {
         //
-        $computer=Computer::find($id);
+        $computer=Computador::find($id);
         return view('relaciones.edit')->with('computer',$computer);
     }
 
