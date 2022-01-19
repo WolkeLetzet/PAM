@@ -12,13 +12,10 @@ use App\Http\Controllers\ComputadorController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/kachipum',function (){
-    //return view('/ppt/kachipum');
-    return redirect('comp');
-})->name('kachipum');
+
 
 Route::get('/', function () {
-    return redirect()->route('kachipum');
+    return redirect('comp');
 });
 Route::resource('comp',ComputadorController::class);
 
@@ -27,7 +24,7 @@ Route::namespace('App\Http\Controllers')->group(function(){
     Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
     Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
 });
-
+Route::view('/kachipum', 'ppt.kachipum');
 
 
 

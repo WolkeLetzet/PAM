@@ -7,6 +7,7 @@ use App\Models\Computador;
 use \App\Models\Oficina;
 use App\Models\Comentario;
 use App\Models\TipoUso;
+use Illuminate\Support\Facades\DB;
 
 class ComputadorController extends Controller
 {
@@ -35,7 +36,12 @@ class ComputadorController extends Controller
         
         $oficinas = Oficina::all();
         $tipo_usos= TipoUso::all();
-        return view('relaciones.create')->with('oficinas',$oficinas)->with('tipo_usos',$tipo_usos);
+        $marcas= DB::table('computadores')->select('marca')->distinct()->get();
+        $sos= DB::table('computadores')->select('so')->distinct()->get();
+        return view('relaciones.create')->with('oficinas',$oficinas)
+                                        ->with('tipo_usos',$tipo_usos)
+                                        ->with('marcas',$marcas)
+                                        ->with('sos',$sos);
     }
 
     /**
@@ -73,8 +79,13 @@ class ComputadorController extends Controller
         $computador=Computador::find($id);
         $oficinas = Oficina::all();
         $tipo_usos= TipoUso::all();
+        $sos= DB::table('computadores')->select('so')->distinct()->get();
+
         
-        return view('relaciones.edit')->with('computer',$computador)->with('oficinas',$oficinas)->with('tipo_usos',$tipo_usos);
+        return view('relaciones.edit')  ->with('computer',$computador)
+                                        ->with('oficinas',$oficinas)
+                                        ->with('tipo_usos',$tipo_usos)
+                                        ->with('sos',$sos);
     }
 
     /**

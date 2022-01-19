@@ -14,7 +14,7 @@
 
                 <th>Usuario</th>
                 <th>Tipo de Uso</th>
-                <th>Comentarios</th>
+                <th>acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +52,7 @@
                         @endforeach
                         </td>
                     @endif
+                    
 
  
             <th>

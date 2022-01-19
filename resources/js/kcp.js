@@ -7,6 +7,12 @@ function kachipum(choice) {
     let COM = parseInt(Math.random() * 3);
 
     const options=["Piedra","Papel","Tijera"];
+    setTimeout((COM)=>{
+        setInterval((COM)=>{
+            Animationselect();
+        },100)
+        
+    },1000)
 
     let result = "";
 
@@ -50,6 +56,10 @@ function kachipum(choice) {
     let tbody = document.getElementById("tbody");
     tbody.innerHTML += template;
 
+
+}
+
+function Animationselect(){
 
 }
 
