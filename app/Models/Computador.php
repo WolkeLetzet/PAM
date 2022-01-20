@@ -26,10 +26,6 @@ class Computador extends Model
         
     }
 
-    public function encargado()
-    {
-        return $this->belongsTo(Encargado::class, 'encargado_id');
-    }
 
 
     public function tipo_usos()

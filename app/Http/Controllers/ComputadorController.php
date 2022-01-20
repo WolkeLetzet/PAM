@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Encargado;
 use Illuminate\Http\Request;
 use App\Models\Computador;
 use \App\Models\Oficina;
@@ -20,12 +18,11 @@ class ComputadorController extends Controller
     public function index()
     {   
         $data=Computador::with('oficinas') 
-                        ->with('encargado')
                         ->with('tipo_usos')
                         ->with('comentarios')->paginate(10);
         //$data=Computador::with('oficinas')->with('encargado')->get();
         
-        return view('relaciones.index')->with('data',$data);
+        return view('relaciones.index')->with('computers',$data);
                                        
     }
 
@@ -69,22 +66,7 @@ class ComputadorController extends Controller
         $computador->tipo_almac=$req->tipoAlm;
 
         
-        if($req->encargado!=null){ //en caso de que se ingrese un encargado
-            $id=DB::table('encargados')->select('id')->where('nombre','=',$req->encargado)->get();
-            if ($id->first()) {
-                # code...
-                $encargado= Encargado::find($id->first()->id);
-            } else {
-                # code...
-                $encargado=new Encargado;
-                $encargado->nombre= $req->encargado;
-                $encargado->save();
-            }
-            
-            
-            $computador->encargado()->associate($encargado);
-        }
-
+       
         
                 
         $computador->save();

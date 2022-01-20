@@ -24,7 +24,7 @@ class ComputadorFactory extends Factory
         $ram=['256 MB','512 MB','1 GB','2 GB','4 GB','8 GB','16 GB'];
         //Elegir al azar si un computador tiene encargado
         if (rand(0,1)) {
-            $idd=Encargado::factory()->create()->id;
+            $idd=$this->faker->name;
         }
         else{
             $idd=null;
@@ -41,7 +41,7 @@ class ComputadorFactory extends Factory
 
             
             
-            'encargado_id' =>$idd
+            'encargado' =>$idd
         ];
     }
 }
