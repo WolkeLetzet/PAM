@@ -81,7 +81,6 @@ class ComputadorController extends Controller
         foreach ($req->tipo_usos as $usos_id) {
             # code...
             $tipo_uso=TipoUso::find($usos_id);
-            
             $computador->tipo_usos()->attach($tipo_uso);
         }
 

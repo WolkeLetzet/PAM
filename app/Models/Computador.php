@@ -40,6 +40,6 @@ class Computador extends Model
      */
     public function comentarios()
     {
-        return $this->hasOne(Comentario::class);
+        return $this->hasMany(Comentario::class);
     }
 }

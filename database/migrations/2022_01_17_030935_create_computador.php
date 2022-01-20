@@ -23,8 +23,6 @@ class CreateComputador extends Migration
             $table->string('tipo_almac');
             $table->string('so');
             $table->string('encargado')->nullable();
-            
-            $table->unsignedBigInteger('encargado_id')->nullable();
             $table->timestamps();
 
         });
