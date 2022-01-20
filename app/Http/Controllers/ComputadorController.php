@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Encargado;
 use Illuminate\Http\Request;
 use App\Models\Computador;
 use \App\Models\Oficina;
@@ -17,12 +18,15 @@ class ComputadorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
-        $data=Computador::with('oficinas')->with('encargado')->with('tipo_usos')->with('comentarios')->paginate(5);
+    {   
+        $data=Computador::with('oficinas') 
+                        ->with('encargado')
+                        ->with('tipo_usos')
+                        ->with('comentarios')->paginate(10);
         //$data=Computador::with('oficinas')->with('encargado')->get();
         
         return view('relaciones.index')->with('data',$data);
+                                       
     }
 
     /**
@@ -50,9 +54,57 @@ class ComputadorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        //Recordatorio: Modificar el create para aceptar nuevas Oficinas y Tipos de Uso
+
+        
+        $computador= new Computador;
+        $computador->marca= $req->marca;
+        $computador->so= $req->so;
+        $computador->fecha=$req->fecha;
+        $computador->almacenamiento=$req->almacenamiento;
+        $computador->modelo=$req->modelo;
+        $computador->ram=$req->ram;
+        $computador->tipo_almac=$req->tipoAlm;
+
+        
+        if($req->encargado!=null){ //en caso de que se ingrese un encargado
+            $id=DB::table('encargados')->select('id')->where('nombre','=',$req->encargado)->get();
+            if ($id->first()) {
+                # code...
+                $encargado= Encargado::find($id->first()->id);
+            } else {
+                # code...
+                $encargado=new Encargado;
+                $encargado->nombre= $req->encargado;
+                $encargado->save();
+            }
+            
+            
+            $computador->encargado()->associate($encargado);
+        }
+
+        
+                
+        $computador->save();
+
+        foreach ($req->oficinas as $oficina_id) {
+            # code...
+            $oficina=Oficina::find($oficina_id);
+           
+            $computador->oficinas()->attach($oficina);
+        }
+
+        foreach ($req->tipo_usos as $usos_id) {
+            # code...
+            $tipo_uso=TipoUso::find($usos_id);
+            
+            $computador->tipo_usos()->attach($tipo_uso);
+        }
+
+        return redirect('/');
+
     }
 
     /**

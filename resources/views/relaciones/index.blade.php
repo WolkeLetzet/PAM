@@ -6,14 +6,14 @@
     <table class="table ">
         <thead>
             <tr>
-                <th>ID PC</th>
+                <th>ID</th>
                 <th>Marca</th>
                 <th>Modelo</th>
              
                 <th>Oficina</th>
 
                 <th>Usuario</th>
-                <th>Tipo de Uso</th>
+                <th>Tipos de Uso</th>
                 <th>acciones</th>
             </tr>
         </thead>

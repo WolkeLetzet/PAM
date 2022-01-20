@@ -2,144 +2,142 @@
 
 @section('create-form')
 
-<div class="container-sm">
-       
-    <form action="" method="post">
-        @csrf
+    <div class="container-sm">
 
-        <div class="row">
-            <div class="mb-3 col-6">
-                <label for="marca" class="form-label">Marca</label>
-                <input type="text" list="marcasList"
-                class="form-control" name="marca" id="marca" placeholder="Marca" value="">
-                <small id="helpId" class="form-text text-muted">Marca del Fabricante</small>
-                <datalist id="marcasList">
-                    @foreach ($marcas as $marca)
-                        <option value="{{$marca->marca}}"></option>
-                    @endforeach
-                </datalist>
-            </div>
+        <form action="{{url('comp/')}}" method="POST">
+            @csrf
 
-
-            <div class="mb-3 col-6">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" value="">
-                <small id="helpId" class="form-text text-muted">Modelo del Computador</small>
-            </div>
-
-
-            <div class="mb-3 col-6">
-                <label for="so" class="form-label">Sistema Operativo</label>
-                <input type="text" list="soList"
-                class="form-control" name="so" id="so" placeholder="Sistema Operativo" value="">
-                <small id="helpId" class="form-text text-muted">Ejemplo: " Windows 10 "</small>
-                <datalist id="soList">
-                    @foreach ($sos as $so)
-                        <option value="{{$so->so}}"></option>
-                    @endforeach
-                </datalist>
-            </div>
-            <div class="mb-3 col-6">
-                <label for="ram" class="form-label">RAM</label>
-                <input type="text" class="form-control" name="ram" id="ram" placeholder="RAM" value="">
-                <small class="form-text text-muted">Ejemplo: " 4 GB "</small>
-            </div>
-
-            <div class="mb-3 col-12">
-                <label for="almacenamiento" class="form-label">Almacenamiento</label>
-                <div class="row">
-                    <div class="col">
-                        <input type="text" class="form-control" name="encargado" id="Almacenamiento" placeholder="Almacenamiento" value="">
-                        <small id="helpId" class="form-text text-muted">Ejemplo: " 500 GB "</small>
-                    </div>
-                    
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipoAlm" id="HDD" value="HDD">
-                            <label class="form-check-label" for="HDD">
-                                HDD
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipoAlm" id="SDD" value="SDD" >
-                            <label class="form-check-label" for="SDD">
-                                SDD
-                            </label>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" list="marcasList" class="form-control" name="marca" id="marca" placeholder="Marca"
+                        value="">
+                    <small id="helpId" class="form-text text-muted">Marca del Fabricante</small>
+                    <datalist id="marcasList">
+                        @foreach ($marcas as $marca)
+                            <option value="{{ $marca->marca }}"></option>
+                        @endforeach
+                    </datalist>
                 </div>
-            
-            </div> 
-            
-            
 
-            <div class="mb-3 col-6">
-                <label for="encargado" class="form-label">Encargado</label>
-                <input type="text" class="form-control" name="encargado" id="encargado" placeholder="Encargado" value="">
-                <small id="helpId" class="form-text text-muted">Persona a cargo del Computador</small>
-            </div>
-            <div class="mb-3 col-6">
-                <label for="fecha" class="form-label">Fecha</label>
-                <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" value="">
-                <small id="helpId" class="form-text text-muted"></small>
-            </div>
 
-        </div>
+                <div class="mb-3 col-6">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" value="">
+                    <small id="helpId" class="form-text text-muted">Modelo del Computador</small>
+                </div>
 
-        <div class="row">
-            
 
-            <div class="col">
-                <h6>Elija a que oficina(s) pertenece el Computador</h6>
-                @foreach ($oficinas as $oficina)
-                    
-                    <div class="form-check">
+                <div class="mb-3 col-6">
+                    <label for="so" class="form-label">Sistema Operativo</label>
+                    <input type="text" list="soList" class="form-control" name="so" id="so"
+                        placeholder="Sistema Operativo" value="">
+                    <small id="helpId" class="form-text text-muted">Ejemplo: " Windows 10 "</small>
+                    <datalist id="soList">
+                        @foreach ($sos as $so)
+                            <option value="{{ $so->so }}"></option>
+                        @endforeach
+                    </datalist>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="ram" class="form-label">RAM</label>
+                    <input type="text" class="form-control" name="ram" id="ram" placeholder="RAM" value="">
+                    <small class="form-text text-muted">Ejemplo: " 4 GB "</small>
+                </div>
 
-                        <input class="form-check-input" type="checkbox" name="oficinas" id="oficina{{$oficina->id}}" value="{{$oficina->id}}">
-                        
-                        <label for="oficina{{$oficina->id}}" class="form-check-label">
-                            {{$oficina->nombre}}
-                        </label>
-                    
+                <div class="mb-3 col-12">
+                    <label for="almacenamiento" class="form-label">Almacenamiento</label>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" name="almacenamiento" id="Almacenamiento"
+                                placeholder="Almacenamiento" value="">
+                            <small id="helpId" class="form-text text-muted">Ejemplo: " 500 GB "</small>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipoAlm" id="HDD" value="HDD">
+                                <label class="form-check-label" for="HDD">
+                                    HDD
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipoAlm" id="SDD" value="SDD">
+                                <label class="form-check-label" for="SDD">
+                                    SDD
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                @endforeach    
+
+                </div>
+
+
+
+                <div class="mb-3 col-6">
+                    <label for="encargado" class="form-label">Encargado</label>
+                    <input type="text" class="form-control" name="encargado" id="encargado" placeholder="Encargado"
+                        value="">
+                    <small id="helpId" class="form-text text-muted">Persona a cargo del Computador</small>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" value="">
+                    <small id="helpId" class="form-text text-muted"></small>
+                </div>
 
             </div>
-            
-            
-            <div class="col">
-                <h6>Elija que Uso(s) tiene, tuvo o tendra</h6>
-                @foreach ($tipo_usos as $uso )
 
-                    <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="tipos_usos" id="uso{{$uso->id}}" value="{{$uso->id}}">
-                    <label class="form-check-label" for="uso{{$uso->id}}">
-                        {{$uso->nombre}}
-                    </label>
-                    </div>
-                    
-                @endforeach
+            <div class="row">
+
+
+                <div class="col">
+                    <h6>Elija a que oficina(s) pertenece el Computador</h6>
+                    @foreach ($oficinas as $oficina)
+
+                        <div class="form-check">
+
+                            <input class="form-check-input" type="checkbox" name="oficinas[]" id="oficina{{ $oficina->id }}"
+                                value="{{ $oficina->id }}">
+
+                            <label for="oficina{{ $oficina->id }}" class="form-check-label">
+                                {{ $oficina->nombre }}
+                            </label>
+
+                        </div>
+                    @endforeach
+
+                </div>
+
+
+                <div class="col">
+                    <h6>Elija que Uso(s) tiene, tuvo o tendra</h6>
+                    @foreach ($tipo_usos as $uso)
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="tipo_usos[]" id="uso{{ $uso->id }}"
+                                value="{{ $uso->id }}">
+                            <label class="form-check-label" for="uso{{ $uso->id }}">
+                                {{ $uso->nombre }}
+                            </label>
+                        </div>
+
+                    @endforeach
+                </div>
             </div>
-        </div>
 
-       
 
-        <div class="row" style="margin-top: 3%">
-            <div class="input-group">
-                <span onclick="agregarOtroComentario()" class="input-group-text" style="display: flex; align-items: center"><i class="bi bi-question-lg" style="font-size: 30px"></i> </span>
-                <textarea class="form-control" aria-label="Comentario"></textarea>
+
+
+
+            <div id="buttons" style="margin-top: 3%">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a href="{{ url('comp') }}" class="btn btn-danger">Cancel</a>
             </div>
-        </div>
 
-        
-        <div id="buttons" style="margin-top: 3%">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-            <a href="{{url('comp')}}" class="btn btn-danger">Cancel</a>
-        </div>
-        
-    </form>
-    
-    
-</div>
+        </form>
+
+
+    </div>
 @endsection

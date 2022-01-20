@@ -11,6 +11,6 @@ class Oficina extends Model
     use HasFactory;
     function computadores()
     {
-        return $this->belongsToMany(Computador::class, 'computador_oficina', 'computador_id', 'oficina_id')->withTimeStamps();
+        return $this->belongsToMany(Computador::class, 'computador_oficina', 'oficina_id', 'computador_id')->withTimeStamps();
     }
 }

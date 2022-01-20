@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Computador;
+
 use App\Models\Encargado;
 use App\Models\TipoUso;
 
@@ -22,7 +22,7 @@ class Computador extends Model
     public function oficinas()
     {
         
-        return $this->belongsToMany(Oficina::class, 'computador_oficina', 'computador_id', 'oficina_id');
+        return $this->belongsToMany(Oficina::class, 'computador_oficina', 'computador_id', 'oficina_id')->withTimestamps();
         
     }
 
