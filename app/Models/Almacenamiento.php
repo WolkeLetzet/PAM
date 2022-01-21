@@ -16,6 +16,6 @@ class Almacenamiento extends Model
      */
     public function computador()
     {
-        return $this->belongsTo(Computador::class, 'computer_id');
+        return $this->belongsTo(Computador::class, 'computador_id');
     }
 }

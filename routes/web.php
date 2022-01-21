@@ -25,6 +25,8 @@ Route::namespace('App\Http\Controllers')->group(function(){
     Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
     Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
     Route::post('comp/create',   'ComputadorController@store')->name('store');
+    Route::post('comp/show/{computer_id}/{comentario_id}','ComputadorController@destroyComentario')->name('destroyComentario');
+    Route::post('comp/show/{computer_id}/comment/create','')
     
 });
 Route::view('/kachipum', 'ppt.kachipum');

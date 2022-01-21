@@ -42,4 +42,15 @@ class Computador extends Model
     {
         return $this->hasMany(Comentario::class);
     }
+
+
+    /**
+     * Get all of the comments for the Computador
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discos()
+    {
+        return $this->hasMany(Almacenamiento::class, 'computador_id');
+    }
 }

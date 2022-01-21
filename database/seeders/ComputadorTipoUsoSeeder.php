@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Computador;
+use App\Models\TipoUso;
+
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
@@ -19,8 +22,8 @@ class ComputadorTipoUsoSeeder extends Seeder
         //
         for ($i=0; $i < 20; $i++) { 
             DB::table('computador_tipo_usos')->insert([
-                'computador_id' => rand(1,20),
-                'tipo_uso_id' => rand(1,2),
+                'computador_id' => Computador::all()->random()->id,
+                'tipo_uso_id' => TipoUso::all()->random()->id,
             ]);
         }
         

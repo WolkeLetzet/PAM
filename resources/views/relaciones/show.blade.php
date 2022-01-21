@@ -1,6 +1,8 @@
 @extends('layouts.navbar')
 
 @section('show-computer')
+    <link rel="stylesheet" type="text/css" href="/pruebas/resources/css/comentarios.css">
+
 
 
     <div class="container-sm">
@@ -43,7 +45,7 @@
                                     <tr>
                                         <th>Encargado</th>
                                         @if ($computer->encargado)
-                                            <td>{{ $computer->encargado->nombre }}</td>
+                                            <td>{{ $computer->encargado }}</td>
 
                                         @else
                                             <td></td>
@@ -88,11 +90,20 @@
 
                                     <tr>
                                         <th>Almacenamiento</th>
-                                        <td>{{ $computer->almacenamiento }}</td>
+                                        <td>
+                                            @foreach ($computer->discos as $disco)
+                                                {{ $disco->cantidad }} |
+                                            @endforeach
+
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Tipo de Almacenamiento</th>
-                                        <td>{{ $computer->tipo_almac }}</td>
+                                        <td>
+                                            @foreach ($computer->discos as $disco)
+                                                {{ $disco->tipo }} |
+                                            @endforeach
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>RAM</th>
@@ -108,7 +119,22 @@
 
                             </div>
 
-                            <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade" id="comments" role="tabpanel" >
+
+                                @foreach ($computer->comentarios as $comentario)
+                                    <div class= "comentariobox" style="margin-top: 5px">
+                                        <div class="col" >
+                                            {{$comentario->comentario}}
+                                        </div>
+                                        <form action="{{route('destroyComentario',[$computer->id,$comentario->id])}}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn-close" ></button>
+                                        </form>
+                                        
+                                        
+                                    </div>
+
+                                @endforeach
 
 
                             </div>
@@ -129,6 +155,12 @@
         </div>
 
     </div>
+
+    <script>
+        function eliminarComentario(id){
+
+        }
+    </script>
 
 
 @endsection
