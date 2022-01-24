@@ -126,7 +126,7 @@
 
             <div id="buttons" class="row">
                 <div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-dark">Submit</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
                     <a href="{{ route('index') }}" class="btn btn-danger">Cancel</a>
                 </div>

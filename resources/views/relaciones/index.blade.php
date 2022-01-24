@@ -3,7 +3,6 @@
 @section('table')
 
 
-
     
     <table class="table ">
         <thead>
@@ -69,9 +68,14 @@
             
         </tbody>
     </table>
-    <div>
+    <div class="row">
         {{$computers->links()}}
     </div>
-    
+    <div class="row justify-contain-center">
+        <div class="col">
+            <a href="{{ route('create') }}" class="btn btn-dark">Agregar</a>
+        </div>
+        
+    </div>
 
 @endsection
