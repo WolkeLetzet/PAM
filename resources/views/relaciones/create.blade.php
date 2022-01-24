@@ -4,7 +4,7 @@
 
     <div class="container-sm">
 
-        <form action="{{ url('comp/') }}" method="POST">
+        <form action="{{ route('create')}}" method="POST">
             @csrf
 
             <div class="row">
@@ -45,30 +45,17 @@
                     <small class="form-text text-muted">Ejemplo: " 4 GB "</small>
                 </div>
 
-                <div class="mb-3 col-12">
+                <div class="mb-3 col-6">
                     <label for="almacenamiento" class="form-label">Almacenamiento</label>
-                    <div class="row">
+                    
                         <div class="col">
                             <input type="text" class="form-control" name="almacenamiento" id="Almacenamiento"
                                 placeholder="Almacenamiento" value="">
                             <small id="helpId" class="form-text text-muted">Ejemplo: " 500 GB "</small>
                         </div>
 
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipoAlm" id="HDD" value="HDD">
-                                <label class="form-check-label" for="HDD">
-                                    HDD
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipoAlm" id="SDD" value="SDD">
-                                <label class="form-check-label" for="SDD">
-                                    SDD
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                        
+                    
 
                 </div>
 
@@ -141,7 +128,7 @@
                 <div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
-                    <a href="{{ url('comp') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('index') }}" class="btn btn-danger">Cancel</a>
                 </div>
 
             </div>

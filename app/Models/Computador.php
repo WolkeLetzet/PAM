@@ -43,14 +43,22 @@ class Computador extends Model
         return $this->hasMany(Comentario::class);
     }
 
-
-    /**
-     * Get all of the comments for the Computador
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function discos()
-    {
-        return $this->hasMany(Almacenamiento::class, 'computador_id');
+    public function scopeMarca($query,$marca){
+        if($marca){
+            return $query->where('marca','LIKE',"%$marca%");
+        }
     }
+    public function scopeEncargado($query,$encargado){
+        if($encargado){
+            return $query->orWhere('encargado','LIKE',"%$encargado%");
+        }
+    }
+
+    public function scopeoficina($query,$oficina){
+        if($oficina){
+            return $query->whereHas('oficina','LIKE',"%$oficina%");
+        }
+    }
+    
+
 }

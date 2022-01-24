@@ -22,6 +22,7 @@
     <div class="container-sm">
 
         <form action="" method="post">
+            @csrf
 
             <div class="row">
 
@@ -62,38 +63,13 @@
                         value="{{ $computer->ram }}">
                     <small class="form-text text-muted">Ejemplo: " 4 GB "</small>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-6">
                     <label for="almacenamiento" class="form-label">Almacenamiento</label>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control" name="encargado" id="Almacenamiento"
-                                placeholder="Almacenamiento" value="{{ $computer->almacenamiento }}">
-                            <small id="helpId" class="form-text text-muted">Ejemplo: " 500 GB "</small>
-                        </div>
 
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipoAlm" id="HDD" value="HDD"
-                                    @if ($computer->tipo_almac == 'HDD')
-                                checked
-                                @endif
-                                >
-                                <label class="form-check-label" for="HDD">
-                                    HDD
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipoAlm" id="SDD" value="SDD"
-                                    @if ($computer->tipo_almac == 'SDD')
-                                checked
-                                @endif
-                                >
-                                <label class="form-check-label" for="SDD">
-                                    SDD
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+
+                    <input type="text" class="form-control" name="encargado" id="Almacenamiento"
+                        placeholder="Almacenamiento" value="{{ $computer->almacenamiento }}">
+                    <small id="helpId" class="form-text text-muted">Ejemplo: " 500 GB "</small>
 
                 </div>
 
@@ -117,80 +93,80 @@
 
             <div class="row">
 
-                
-                    
-                
+
+
+
                 <div class="mb-3 col">
-                    
+
                     <h6>Elija a que oficina(s) pertenece el Computador</h6>
                     @isset($oficinas)
-                    @foreach ($oficinas as $oficina)
+                        @foreach ($oficinas as $oficina)
 
-                        <div class="form-check">
+                            <div class="form-check">
 
-                            <input class="form-check-input" type="checkbox" name="oficinas[]"
-                                id="oficina{{ $oficina->id }}" value="{{ $oficina->id }}" 
-                            @if ($ar)
-                            @if (in_array($oficina->id, $ar))
-                                checked
-                                
-                            @endif
-                    
-                        >@endif
-                        <label for="oficina{{ $oficina->id }}" class="form-check-label">
-                        {{ $oficina->nombre }}
+                                <input class="form-check-input" type="checkbox" name="oficinas[]"
+                                    id="oficina{{ $oficina->id }}" value="{{ $oficina->id }}"
+                                @if ($ar)
+                                    @if (in_array($oficina->id, $ar))
+                                        checked
+                                    @endif
+                                @endif
+                                >
+                        <label class="form-check-label" for="oficina{{ $oficina->id }}">
+                            {{ $oficina->nombre }}
                         </label>
-                        </div>
-                    
+                    </div>
+
                     @endforeach
-                
+
                 @endisset
 
 
             </div>
-           
-                
-            
+
+
+
             <div class="mb-3 col">
                 <h6>Elija que Uso(s) tiene, tuvo o tendra</h6>
                 @isset($tipo_usos)
-                @foreach ($tipo_usos as $uso)
+                    @foreach ($tipo_usos as $uso)
 
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="tipos_usos[]" id="uso{{ $uso->id }}"
-                            value="{{ $uso->id }}"
-                         @if ($ar2)
-                        @if (in_array($uso->id, $ar2))
-                            checked
-                        @endif
-                        @endif
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="tipos_usos[]" id="uso{{ $uso->id }}"
+                                value="{{ $uso->id }}" @if ($ar2)
+                            @if (in_array($uso->id, $ar2))
+                                checked
+                            @endif
+                    @endif
 
 
-                        >
+                    >
                     <label class="form-check-label" for="uso{{ $uso->id }}">
                         {{ $uso->nombre }}
                     </label>
-                    </div>
+                </div>
 
                 @endforeach
-
-            </div>
             @endisset
-            
-
-
-
-            </div>
-        
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-            <a href="{{ url('comp') }}" class="btn btn-danger">Cancel</a>
-
-        </form>
-
-
     </div>
+
+
+
+
+
+
+
+<div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-secondary">Reset</button>
+    <a href="{{ route('index') }}" class="btn btn-danger">Cancel</a>
+
+</div>
+    
+    </form>
+
+
+</div>
 
 
 @endsection

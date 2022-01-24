@@ -2,6 +2,8 @@
 
 @section('table')
 
+
+
     
     <table class="table ">
         <thead>
@@ -57,7 +59,7 @@
  
             <th>
                 
-                <a href="{{url('/comp/show/'.$computer->id)}}" class= "btn btn-secondary">Ver</a>
+                <a href="{{route('show',$computer->id)}}" class= "btn btn-outline-dark">Ver</a>
             
             </th>
 

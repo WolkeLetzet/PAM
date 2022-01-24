@@ -15,16 +15,17 @@ use App\Http\Controllers\ComputadorController;
 
 
 Route::get('/', function () {
-    return redirect('comp');
-})->name('comp');
+    return redirect('index');
+})->name('index');
 
 
 Route::namespace('App\Http\Controllers')->group(function(){
-    Route::resource('comp','ComputadorController');
+    Route::resource('index','ComputadorController');
     Route::get('comp/create',    'ComputadorController@create')->name('create');
     Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
     Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
     Route::post('comp/create',   'ComputadorController@store')->name('store');
+    Route::post('comp/edit/{id}', 'ComputadorController@update')->name('update');
 
     Route::post('comp/show/{id}/delete','ComputadorController@destroy')->name('destroy');
 

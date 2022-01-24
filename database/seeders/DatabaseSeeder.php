@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(OficinaSeeder::class);
 
-        Computador::factory(20)->has(Almacenamiento::factory()->count(rand(1,3)),'discos')->has(Comentario::factory(1)->count(rand(0,5)),'comentarios') ->create();
+        Computador::factory(20)->has(Comentario::factory(1)->count(rand(0,5)),'comentarios') ->create();
 
 
 

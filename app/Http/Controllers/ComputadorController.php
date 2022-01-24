@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Almacenamiento;
 use Illuminate\Http\Request;
 use App\Models\Computador;
 use \App\Models\Oficina;
@@ -17,12 +16,27 @@ class ComputadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $data = Computador::with('oficinas')
+    public function index(Request $req)
+    {    
+        $search = trim($req->search);
+        if($search){
+            $data = Computador::where('estado','=','1')->whereHas('oficinas',function($query) use ($search){
+                return $query->where('nombre','LIKE',"%$search%");
+            })->orWhere('encargado','LIKE',"%$search%")
+            ->with('oficinas')
             ->with('tipo_usos')
             ->with('comentarios')->paginate(10);
-        //$data=Computador::with('oficinas')->with('encargado')->get();
+        }
+        else{
+            $data = Computador::where('estado','=','1')
+            ->with('oficinas')
+            ->with('tipo_usos')
+            ->with('comentarios')->paginate(10);
+        }
+
+        
+        
+        
 
         return view('relaciones.index')->with('computers', $data);
     }
@@ -64,6 +78,7 @@ class ComputadorController extends Controller
         $computador->encargado = $req->encargado;
         $computador->modelo = $req->modelo;
         $computador->ram = $req->ram;
+        $computador->almacenamiento= $req->almacenamiento;
 
         $computador->save();
         foreach ($req->oficinas as $oficina_id) {
@@ -79,12 +94,6 @@ class ComputadorController extends Controller
             $computador->tipo_usos()->attach($tipo_uso);
         }
 
-        $discos = new Almacenamiento;
-
-        $discos->tipo = $req->tipoAlm;
-        $discos->cantidad = $req->almacenamiento;
-        $discos->computador()->associate($computador);
-        $discos->save();
         if($req->comentario){
 
             $comentario=new Comentario;
@@ -95,7 +104,7 @@ class ComputadorController extends Controller
         
 
 
-        return redirect(url('comp/show/' . $computador->id));
+        return redirect(route('show',$computador->id));
     }
 
     /**
@@ -140,9 +149,35 @@ class ComputadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
         //
+        $computador = Computador::find($id);
+        $computador->marca = $req->marca;
+        $computador->so = $req->so;
+        $computador->fecha = $req->fecha;
+        $computador->encargado = $req->encargado;
+        $computador->modelo = $req->modelo;
+        $computador->ram = $req->ram;
+
+        $computador->save();
+
+        foreach ($req->oficinas as $oficina_id) {
+            # code...
+            $oficina = Oficina::find($oficina_id);
+
+            $computador->oficinas()->attach($oficina);
+        }
+
+        foreach ($req->tipos_usos as $usos_id) {
+            # code...
+            $tipo_uso = TipoUso::find($usos_id);
+            $computador->tipo_usos()->attach($tipo_uso);
+        }
+
+
+
+        return redirect(url('comp/show/' . $computador->id));
     }
 
     /**
@@ -155,11 +190,9 @@ class ComputadorController extends Controller
     {
         //
         $computador=Computador::find($id);
-        $computador->discos()->delete();
-        $computador->tipo_usos()->detach();
-        $computador->oficinas()->detach();
-        $computador->comentarios()->delete();
-        $computador->delete();
+        $computador->estado=false;
+        $computador->save();
+        
         return redirect(route('index'));
 
     }
@@ -188,9 +221,8 @@ class ComputadorController extends Controller
     public function agregarComentario($id)
     {
         $computador=Computador::find($id);
-        //NOta: ver si no es necesario enviar toda  la ifo del computador y asi volvel el envio mas ligero
-        return view('relaciones.add_comentario')->with('comentarios',$computador->comentarios);
-        //return view('relaciones.add_comentario');
+       
+        return view('relaciones.add_comentario')->with('comentarios',$computador->comentarios)->with('compu_id',$id);
     }
     public function updateComentario(Request $req,$id)
     {

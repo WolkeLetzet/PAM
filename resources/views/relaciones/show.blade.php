@@ -91,20 +91,11 @@
                                     <tr>
                                         <th>Almacenamiento</th>
                                         <td>
-                                            @foreach ($computer->discos as $disco)
-                                                {{ $disco->cantidad }} |
-                                            @endforeach
 
+                                            {{ $computer->almacenamiento }}
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>Tipo de Almacenamiento</th>
-                                        <td>
-                                            @foreach ($computer->discos as $disco)
-                                                {{ $disco->tipo }} |
-                                            @endforeach
-                                        </td>
-                                    </tr>
+
                                     <tr>
                                         <th>RAM</th>
                                         <td>{{ $computer->ram }}</td>
@@ -119,9 +110,9 @@
 
                             </div>
                             <!---
-     Nota: optimizar la vista crando un arreglo que guarde los id de los comentarios que vayan a hacer eliminados y que al momento de salir de la pagina usr el controlador para boorarlos
-     o crear una opcion que envie a una vista para elegir y eliminar comentarios
-    -->
+         Nota: optimizar la vista crando un arreglo que guarde los id de los comentarios que vayan a hacer eliminados y que al momento de salir de la pagina usr el controlador para boorarlos
+         o crear una opcion que envie a una vista para elegir y eliminar comentarios
+        -->
                             <div class="tab-pane fade" id="comments" role="tabpanel">
 
                                 @foreach ($computer->comentarios as $comentario)
@@ -130,8 +121,9 @@
                                             {{ $comentario->comentario }}
                                         </div>
                                         <form action="{{ route('destroyComentario', [$computer->id, $comentario->id]) }}"
-                                            method="post">
+                                            method="POST">
                                             @csrf
+                                           
                                             <button type="submit" class="btn-close"></button>
                                         </form>
 
@@ -153,14 +145,14 @@
                             <div class="col">
                                 <a class="btn btn-primary" href="{{ route('edit', $computer->id) }}"
                                     role="button">Editar</a>
-                                <a class="btn btn-secondary" href="{{ route('addcomentario', $computer->id) }}">Agregar
-                                    Comentario</a>
-                                
+                                <a class="btn btn-secondary" href="{{ route('addcomentario', $computer->id) }}"> Agregar Comentario </a>
+
                             </div>
                             <form class="col-2" action="{{ route('destroy', $computer->id) }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
+                                @csrf
+                                
+                                <button type="submit" onclick="confirm('¿Seguro de eliminar este Computador?')" class="btn btn-danger">Eliminar</button>
+                            </form>
                         </div>
 
                     </div>

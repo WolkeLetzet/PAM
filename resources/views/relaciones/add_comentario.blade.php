@@ -15,7 +15,7 @@
 
                 </div>
                 <button type="submit" href="" class="btn btn-dark">Agregar</button>
-               <a class="btn btn-light" href="{{route('show',$comentarios->first()->computador->id)}}">Volver</a>
+               <a class="btn btn-light" href="{{route('show',$compu_id)}}">Volver</a>
 
 
 
