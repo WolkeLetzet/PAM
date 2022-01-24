@@ -161,14 +161,39 @@ class ComputadorController extends Controller
         return redirect(route('comp.show',$computer_id));
     }
 
-    public function agregarComentario($computer_id,Request $req){
+    public function editarComentario($id)
+    {
+        $comentario=Comentario::find($id);
+        $computador=Computador::find($comentario->computador->id);
+        return view('relaciones.edit_comentario')->with('comentario',$comentario)
+                                                ->with('computador',$computador);
+    }
+
+    public function agregarComentario($id)
+    {
+        $computador=Computador::find($id);
+        //NOta: ver si no es necesario enviar toda  la ifo del computador y asi volvel el envio mas ligero
+        return view('relaciones.add_comentario')->with('comentarios',$computador->comentarios);
+        //return view('relaciones.add_comentario');
+    }
+    public function updateComentario(Request $req,$id)
+    {
+        # code...
+        $comentario=Comentario::find($id);
+        $comentario->comentario= $req->comentario;
+        $comentario->save();
+        return redirect(route('addcomentario',$comentario->computador_id));
+    }
+    
+
+    public function guardarComentario($computer_id,Request $req){
 
         $comentario= new Comentario;
         $computador= Computador::find($computer_id);
         $comentario->comentario= $req->comentario;
         $comentario->computador()->associate($computador);
         $comentario->save();
-        return redirect(route('comp.show',$computer_id));
+        return redirect(route('addcomentario',$computer_id));
 
     }
 }

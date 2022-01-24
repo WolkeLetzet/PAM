@@ -4,7 +4,7 @@
 
     <div class="container-sm">
 
-        <form action="{{url('comp/')}}" method="POST">
+        <form action="{{ url('comp/') }}" method="POST">
             @csrf
 
             <div class="row">
@@ -97,8 +97,8 @@
 
                         <div class="form-check">
 
-                            <input class="form-check-input" type="checkbox" name="oficinas[]" id="oficina{{ $oficina->id }}"
-                                value="{{ $oficina->id }}">
+                            <input class="form-check-input" type="checkbox" name="oficinas[]"
+                                id="oficina{{ $oficina->id }}" value="{{ $oficina->id }}">
 
                             <label for="oficina{{ $oficina->id }}" class="form-check-label">
                                 {{ $oficina->nombre }}
@@ -126,18 +126,33 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-6">
+                    <label for="comentario" class="form-label">Comentario</label>
+                    <textarea class="form-control" name="comentario" id="comentario" rows="5"></textarea>
+                </div>
+            </div>
 
 
 
 
-            <div id="buttons" style="margin-top: 3%">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-                <a href="{{ url('comp') }}" class="btn btn-danger">Cancel</a>
+
+            <div id="buttons" class="row">
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a href="{{ url('comp') }}" class="btn btn-danger">Cancel</a>
+                </div>
+
             </div>
 
         </form>
 
+        <style>
+            .row {
+                margin-top: 2%;
+            }
 
+        </style>
     </div>
 @endsection

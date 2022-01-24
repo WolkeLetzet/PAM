@@ -49,6 +49,7 @@
         @yield('edit-form')
 
         @yield('show-computer')
+        @yield('add-comment')
     </div>
 
 

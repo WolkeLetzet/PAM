@@ -46,11 +46,15 @@
                     <input type="text" list="soList" class="form-control" name="so" id="so"
                         placeholder="Sistema Operativo" value="{{ $computer->so }}">
                     <small id="helpId" class="form-text text-muted">Ejemplo: " Windows 10 "</small>
-                    <datalist id="soList">
-                        @foreach ($sos as $so)
-                            <option value="{{ $so->so }}"></option>
-                        @endforeach
-                    </datalist>
+
+                    @isset($sos)
+                        <datalist id="soList">
+                            @foreach ($sos as $so)
+                                <option value="{{ $so->so }}"></option>
+                            @endforeach
+                        </datalist>
+                    @endisset
+
                 </div>
                 <div class="mb-3 col-6">
                     <label for="ram" class="form-label">RAM</label>
@@ -97,7 +101,7 @@
                     <label for="encargado" class="form-label">Encargado</label>
                     <input type="text" class="form-control" name="encargado" id="encargado" placeholder="Encargado"
                         @if ($computer->encargado)
-                    value="{{ $computer->encargado->nombre }}"
+                    value="{{ $computer->encargado }}"
                     @endif
                     >
                     <small id="helpId" class="form-text text-muted">Persona a cargo del Computador</small>
@@ -112,74 +116,81 @@
             </div>
 
             <div class="row">
+
+                
+                    
+                
                 <div class="mb-3 col">
+                    
                     <h6>Elija a que oficina(s) pertenece el Computador</h6>
+                    @isset($oficinas)
                     @foreach ($oficinas as $oficina)
 
                         <div class="form-check">
 
-                            <input class="form-check-input" type="checkbox" name="oficinas[]" id="oficina{{ $oficina->id }}"
-                                value="{{ $oficina->id }}" @if ($ar)
+                            <input class="form-check-input" type="checkbox" name="oficinas[]"
+                                id="oficina{{ $oficina->id }}" value="{{ $oficina->id }}" 
+                            @if ($ar)
                             @if (in_array($oficina->id, $ar))
                                 checked
+                                
                             @endif
-                    @endif
-                    >
-                    <label for="oficina{{ $oficina->id }}" class="form-check-label">
+                    
+                        >@endif
+                        <label for="oficina{{ $oficina->id }}" class="form-check-label">
                         {{ $oficina->nombre }}
-                    </label>
-
-                </div>
-                @endforeach
+                        </label>
+                        </div>
+                    
+                    @endforeach
+                
+                @endisset
 
 
             </div>
-
+           
+                
+            
             <div class="mb-3 col">
                 <h6>Elija que Uso(s) tiene, tuvo o tendra</h6>
-
+                @isset($tipo_usos)
                 @foreach ($tipo_usos as $uso)
 
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" name="tipos_usos[]" id="uso{{ $uso->id }}"
-                            value="{{ $uso->id }}" @if ($ar2)
+                            value="{{ $uso->id }}"
+                         @if ($ar2)
                         @if (in_array($uso->id, $ar2))
                             checked
                         @endif
-                @endif
+                        @endif
 
 
-                >
-                <label class="form-check-label" for="uso{{ $uso->id }}">
-                    {{ $uso->nombre }}
-                </label>
+                        >
+                    <label class="form-check-label" for="uso{{ $uso->id }}">
+                        {{ $uso->nombre }}
+                    </label>
+                    </div>
+
+                @endforeach
+
             </div>
-
-            @endforeach
-
-    </div>
-    </div>
+            @endisset
+            
 
 
 
+            </div>
+        
 
-   
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <a href="{{ url('comp') }}" class="btn btn-danger">Cancel</a>
 
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <button type="reset" class="btn btn-secondary">Reset</button>
-    <a href="{{ url('comp') }}" class="btn btn-danger">Cancel</a>
-
-    </form>
+        </form>
 
 
     </div>
-
-    <script>
-
-
-    </script>
-
 
 
 @endsection

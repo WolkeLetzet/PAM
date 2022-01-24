@@ -118,11 +118,14 @@
                                 </table>
 
                             </div>
-
+<!---
+ Nota: optimizar la vista crando un arreglo que guarde los id de los comentarios que vayan a hacer eliminados y que al momento de salir de la pagina usr el controlador para boorarlos
+ o crear una opcion que envie a una vista para elegir y eliminar comentarios
+-->
                             <div class="tab-pane fade" id="comments" role="tabpanel" >
 
                                 @foreach ($computer->comentarios as $comentario)
-                                    <div class= "comentariobox" style="margin-top: 5px">
+                                    <div class= "commentbox">
                                         <div class="col" >
                                             {{$comentario->comentario}}
                                         </div>
@@ -146,8 +149,7 @@
                     </div>
                     <div class="card-footer">
                         <a class="btn btn-primary" href="{{ route('edit', $computer->id) }}" role="button">Editar</a>
-                        <a class="btn btn-secondary" href="">Agregar Comentario</a>
-
+                        <a class="btn btn-secondary" href="{{route('addcomentario',$computer->id)}}">Agregar Comentario</a>
                     </div>
                 </div>
             </div>
