@@ -26,7 +26,14 @@ Route::namespace('App\Http\Controllers')->group(function(){
     Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
     Route::post('comp/create',   'ComputadorController@store')->name('store');
     Route::post('comp/show/{computer_id}/{comentario_id}','ComputadorController@destroyComentario')->name('destroyComentario');
-    Route::post('comp/show/{computer_id}/comment/create','')
+    
+    Route::get('comp/show/{computer_id}/comment/add/','ComputadorController@agregarComentario')->name('addcomentario');
+
+    Route::post('comp/show/{computer_id}/comment/add/','ComputadorController@guardarComentario')->name('guardarComentario');
+
+    Route::get('comp/show/comment/add/{id}','ComputadorController@editarComentario')->name('editcomentario');
+
+    Route::put('comp/show/comment/add/{id}','ComputadorController@updateComentario')->name('updateComentario');
     
 });
 Route::view('/kachipum', 'ppt.kachipum');
