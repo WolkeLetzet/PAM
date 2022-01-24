@@ -15,14 +15,30 @@ use App\Http\Controllers\ComputadorController;
 
 
 Route::get('/', function () {
-    return redirect('comp');
-});
-Route::resource('comp',ComputadorController::class);
+    return redirect('index');
+})->name('index');
+
 
 Route::namespace('App\Http\Controllers')->group(function(){
-    Route::get('comp/create',     'ComputadorController@create')->name('create');
+    Route::resource('index','ComputadorController');
+    Route::get('comp/create',    'ComputadorController@create')->name('create');
     Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
     Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
+    Route::post('comp/create',   'ComputadorController@store')->name('store');
+    Route::post('comp/edit/{id}', 'ComputadorController@update')->name('update');
+
+    Route::post('comp/show/{id}/delete','ComputadorController@destroy')->name('destroy');
+
+    Route::post('comp/show/{computer_id}/{comentario_id}','ComputadorController@destroyComentario')->name('destroyComentario');
+
+    Route::get('comp/show/{computer_id}/comment/add/','ComputadorController@agregarComentario')->name('addcomentario');
+
+    Route::post('comp/show/{computer_id}/comment/add/','ComputadorController@guardarComentario')->name('guardarComentario');
+
+    Route::get('comp/show/comment/add/{id}','ComputadorController@editarComentario')->name('editcomentario');
+
+    Route::put('comp/show/comment/add/{id}','ComputadorController@updateComentario')->name('updateComentario');
+    
 });
 Route::view('/kachipum', 'ppt.kachipum');
 

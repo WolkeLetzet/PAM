@@ -14,8 +14,8 @@ class Comentario extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function computador(): BelongsTo
+    public function computador()
     {
-        return $this->belongsTo(Computador::class);
+        return $this->belongsTo(Computador::class,'computador_id');
     }
 }

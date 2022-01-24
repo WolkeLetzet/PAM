@@ -14,6 +14,7 @@ class CreateComentariosTable extends Migration
     public function up()
     {
         Schema::create('comentarios', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('computador_id')->unsigned();
             $table->string('comentario');
             $table->timestamps();

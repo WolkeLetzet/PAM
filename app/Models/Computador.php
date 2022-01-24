@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Computador;
+
 use App\Models\Encargado;
 use App\Models\TipoUso;
 
@@ -22,14 +22,10 @@ class Computador extends Model
     public function oficinas()
     {
         
-        return $this->belongsToMany(Oficina::class, 'computador_oficina', 'computador_id', 'oficina_id');
+        return $this->belongsToMany(Oficina::class, 'computador_oficina', 'computador_id', 'oficina_id')->withTimestamps();
         
     }
 
-    public function encargado()
-    {
-        return $this->belongsTo(Encargado::class, 'encargado_id');
-    }
 
 
     public function tipo_usos()
@@ -44,6 +40,25 @@ class Computador extends Model
      */
     public function comentarios()
     {
-        return $this->hasOne(Comentario::class);
+        return $this->hasMany(Comentario::class);
     }
+
+    public function scopeMarca($query,$marca){
+        if($marca){
+            return $query->where('marca','LIKE',"%$marca%");
+        }
+    }
+    public function scopeEncargado($query,$encargado){
+        if($encargado){
+            return $query->orWhere('encargado','LIKE',"%$encargado%");
+        }
+    }
+
+    public function scopeoficina($query,$oficina){
+        if($oficina){
+            return $query->whereHas('oficina','LIKE',"%$oficina%");
+        }
+    }
+    
+
 }

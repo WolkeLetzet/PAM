@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Comentario;
+use App\Models\Almacenamiento;
+use App\Models\Computador;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(OficinaSeeder::class);
-        \App\Models\Computador::factory(20)->create();
+
+        Computador::factory(20)->has(Comentario::factory(1)->count(rand(0,5)),'comentarios') ->create();
 
 
 

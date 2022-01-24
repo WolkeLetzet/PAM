@@ -2,52 +2,53 @@
 
 @section('table')
 
+
     
     <table class="table ">
         <thead>
             <tr>
-                <th>ID PC</th>
+                <th>ID</th>
                 <th>Marca</th>
                 <th>Modelo</th>
              
                 <th>Oficina</th>
 
                 <th>Usuario</th>
-                <th>Tipo de Uso</th>
+                <th>Tipos de Uso</th>
                 <th>acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $item)
+            @foreach ($computers as $computer)
                 <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->marca}}</td>
-                    <td>{{$item->modelo}}</td>
-                    @if ($item->oficinas->first() == null)
+                    <td>{{$computer->id}}</td>
+                    <td>{{$computer->marca}}</td>
+                    <td>{{$computer->modelo}}</td>
+                    @if ($computer->oficinas->first() == null)
                         <td>No tiene oficina asignada</td>
 
                     @else
  
                         <td>
-                        @foreach ($item->oficinas as $oficina)
+                        @foreach ($computer->oficinas as $oficina)
                             {{$oficina->nombre}};                           
                         @endforeach
                         </td>
 
                     @endif  
-                    @if ($item->encargado !=null)
-                        <td>{{$item->encargado->nombre}}</td>  
+                    @if ($computer->encargado !=null)
+                        <td>{{$computer->encargado}}</td>  
                     @else
                         <td>No tiene encargado</td>
                     @endif
                      
                     
-                    @if ($item->tipo_usos->first() == null)
+                    @if ($computer->tipo_usos->first() == null)
 
                         <td>No tiene tipo de uso asignado</td>
                     @else
                         <td>
-                        @foreach ($item->tipo_usos as $tipo_uso)
+                        @foreach ($computer->tipo_usos as $tipo_uso)
                             {{$tipo_uso->nombre}};                           
                         @endforeach
                         </td>
@@ -57,7 +58,7 @@
  
             <th>
                 
-                <a href="{{url('/comp/show/'.$item->id)}}" class= "btn btn-secondary">Ver</a>
+                <a href="{{route('show',$computer->id)}}" class= "btn btn-outline-dark">Ver</a>
             
             </th>
 
@@ -67,9 +68,14 @@
             
         </tbody>
     </table>
-    <div>
-        {{$data->links()}}
+    <div class="row">
+        {{$computers->links()}}
     </div>
-    
+    <div class="row justify-contain-center">
+        <div class="col">
+            <a href="{{ route('create') }}" class="btn btn-dark">Agregar</a>
+        </div>
+        
+    </div>
 
 @endsection

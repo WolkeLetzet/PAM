@@ -20,13 +20,11 @@ class CreateComputador extends Migration
             $table->date('fecha');
             $table->string('ram');
             $table->string('almacenamiento');
-            $table->string('tipo_almac');
             $table->string('so');
-            
-            $table->unsignedBigInteger('encargado_id')->nullable();
+            $table->string('encargado')->nullable();
+            $table->boolean('estado')->default(true);
             $table->timestamps();
 
-            $table->foreign('encargado_id')->references('id')->on('encargados')->onDelete('set null');
         });
     }
 

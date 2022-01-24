@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Computador;
 
 class ComentarioFactory extends Factory
 {
@@ -15,7 +16,6 @@ class ComentarioFactory extends Factory
     {
         return [
             //
-            
             'comentario' => $this->faker->sentence,
         ];
     }

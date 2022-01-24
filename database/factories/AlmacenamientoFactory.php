@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EncargadoFactory extends Factory
+class AlmacenamientoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,7 +15,8 @@ class EncargadoFactory extends Factory
     {
         return [
             //
-            'nombre'=>$this->faker->name(),
+            'tipo'=>$this->faker->randomElement(['HDD','SDD']),
+            'cantidad'=>$this->faker->randomElement(['256 GB','500 GB','1 TB','2 TB'])
         ];
     }
 }
