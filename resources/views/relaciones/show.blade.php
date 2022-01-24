@@ -118,23 +118,24 @@
                                 </table>
 
                             </div>
-<!---
- Nota: optimizar la vista crando un arreglo que guarde los id de los comentarios que vayan a hacer eliminados y que al momento de salir de la pagina usr el controlador para boorarlos
- o crear una opcion que envie a una vista para elegir y eliminar comentarios
--->
-                            <div class="tab-pane fade" id="comments" role="tabpanel" >
+                            <!---
+     Nota: optimizar la vista crando un arreglo que guarde los id de los comentarios que vayan a hacer eliminados y que al momento de salir de la pagina usr el controlador para boorarlos
+     o crear una opcion que envie a una vista para elegir y eliminar comentarios
+    -->
+                            <div class="tab-pane fade" id="comments" role="tabpanel">
 
                                 @foreach ($computer->comentarios as $comentario)
-                                    <div class= "commentbox">
-                                        <div class="col" >
-                                            {{$comentario->comentario}}
+                                    <div class="commentbox">
+                                        <div class="col">
+                                            {{ $comentario->comentario }}
                                         </div>
-                                        <form action="{{route('destroyComentario',[$computer->id,$comentario->id])}}" method="post">
+                                        <form action="{{ route('destroyComentario', [$computer->id, $comentario->id]) }}"
+                                            method="post">
                                             @csrf
-                                            <button type="submit" class="btn-close" ></button>
+                                            <button type="submit" class="btn-close"></button>
                                         </form>
-                                        
-                                        
+
+
                                     </div>
 
                                 @endforeach
@@ -148,8 +149,20 @@
 
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-primary" href="{{ route('edit', $computer->id) }}" role="button">Editar</a>
-                        <a class="btn btn-secondary" href="{{route('addcomentario',$computer->id)}}">Agregar Comentario</a>
+                        <div class="row">
+                            <div class="col">
+                                <a class="btn btn-primary" href="{{ route('edit', $computer->id) }}"
+                                    role="button">Editar</a>
+                                <a class="btn btn-secondary" href="{{ route('addcomentario', $computer->id) }}">Agregar
+                                    Comentario</a>
+                                
+                            </div>
+                            <form class="col-2" action="{{ route('destroy', $computer->id) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -159,7 +172,7 @@
     </div>
 
     <script>
-        function eliminarComentario(id){
+        function eliminarComentario(id) {
 
         }
     </script>

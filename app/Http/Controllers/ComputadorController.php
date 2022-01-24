@@ -85,6 +85,14 @@ class ComputadorController extends Controller
         $discos->cantidad = $req->almacenamiento;
         $discos->computador()->associate($computador);
         $discos->save();
+        if($req->comentario){
+
+            $comentario=new Comentario;
+            $comentario->computador()->associate($computador);
+            $comentario->comentario= $req->comentario;
+            $comentario->save();
+        }
+        
 
 
         return redirect(url('comp/show/' . $computador->id));
@@ -146,6 +154,14 @@ class ComputadorController extends Controller
     public function destroy($id)
     {
         //
+        $computador=Computador::find($id);
+        $computador->discos()->delete();
+        $computador->tipo_usos()->detach();
+        $computador->oficinas()->detach();
+        $computador->comentarios()->delete();
+        $computador->delete();
+        return redirect(route('index'));
+
     }
 
 
@@ -158,7 +174,7 @@ class ComputadorController extends Controller
         
         $comentario=Comentario::find($id);
         $comentario->delete();
-        return redirect(route('comp.show',$computer_id));
+        return redirect(route('show',$computer_id));
     }
 
     public function editarComentario($id)

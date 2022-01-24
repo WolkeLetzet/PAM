@@ -153,6 +153,8 @@
                 margin-top: 2%;
             }
 
+            div#buttons {}
+
         </style>
     </div>
 @endsection
