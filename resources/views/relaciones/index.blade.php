@@ -2,7 +2,7 @@
 
 @section('table')
 
-
+@include('relaciones.search-bar')
     
     <table class="table ">
         <thead>

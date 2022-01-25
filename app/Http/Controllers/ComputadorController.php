@@ -82,20 +82,28 @@ class ComputadorController extends Controller
         $computador->modelo = $req->modelo;
         $computador->ram = $req->ram;
         $computador->almacenamiento = $req->almacenamiento;
+        $computador->so_key=$req->so_key;
+        $computador->office_key=$req->office_key;
 
         $computador->save();
-        foreach ($req->oficinas as $oficina_id) {
-            # code...
+        if($req->oficinas){
+            foreach ($req->oficinas as $oficina_id) {
+            
             $oficina = Oficina::find($oficina_id);
 
             $computador->oficinas()->attach($oficina);
+            }
         }
+        if($req->tipo_usos){
 
-        foreach ($req->tipo_usos as $usos_id) {
-            # code...
+            foreach ($req->tipo_usos as $usos_id) {
+            
             $tipo_uso = TipoUso::find($usos_id);
             $computador->tipo_usos()->attach($tipo_uso);
+            }
         }
+
+        
 
         if ($req->comentario) {
 
@@ -162,20 +170,26 @@ class ComputadorController extends Controller
         $computador->encargado = $req->encargado;
         $computador->modelo = $req->modelo;
         $computador->ram = $req->ram;
+        $computador->so_key=$req->so_key;
+        $computador->office_key=$req->office_key;
 
         $computador->save();
 
-        foreach ($req->oficinas as $oficina_id) {
-            # code...
+        if($req->oficinas){
+            foreach ($req->oficinas as $oficina_id) {
+            
             $oficina = Oficina::find($oficina_id);
 
             $computador->oficinas()->attach($oficina);
+            }
         }
+        if($req->tipo_usos){
 
-        foreach ($req->tipos_usos as $usos_id) {
-            # code...
+            foreach ($req->tipo_usos as $usos_id) {
+            
             $tipo_uso = TipoUso::find($usos_id);
             $computador->tipo_usos()->attach($tipo_uso);
+            }
         }
 
 

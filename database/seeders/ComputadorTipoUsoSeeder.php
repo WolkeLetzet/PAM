@@ -20,7 +20,7 @@ class ComputadorTipoUsoSeeder extends Seeder
     public function run()
     {
         //
-        for ($i=0; $i < 20; $i++) { 
+        for ($i=0; $i < 70; $i++) { 
             DB::table('computador_tipo_usos')->insert([
                 'computador_id' => Computador::all()->random()->id,
                 'tipo_uso_id' => TipoUso::all()->random()->id,

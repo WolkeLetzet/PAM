@@ -17,7 +17,7 @@ class ComputadorOficinaSeeder extends Seeder
     public function run()
     {
         //
-        for ($i=0; $i < 15; $i++) { 
+        for ($i=0; $i < 70; $i++) { 
             DB::table('computador_oficina')->insert([
                 'computador_id' => Computador::all()->random()->id,
                 'oficina_id' => Oficina::all()->random()->id,

@@ -101,6 +101,14 @@
                                         <td>{{ $computer->ram }}</td>
                                     </tr>
                                     <tr>
+                                        <th>SO KEY</th>
+                                        <td>{{$computer->so_key}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Microsoft Office Key</th>
+                                        <td>{{$computer->office_key}}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Fecha</th>
                                         <td>{{ date('d-m-Y', strtotime($computer->fecha)) }}</td>
 
@@ -143,15 +151,15 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col">
-                                <a class="btn btn-primary" href="{{ route('edit', $computer->id) }}"
+                                <a class="btn btn-dark" href="{{ route('edit', $computer->id) }}"
                                     role="button">Editar</a>
                                 <a class="btn btn-secondary" href="{{ route('addcomentario', $computer->id) }}"> Agregar Comentario </a>
 
                             </div>
-                            <form class="col-2" action="{{ route('destroy', $computer->id) }}" method="post">
+                            <form class="col-2" action="{{ route('destroy', $computer->id) }}" onsubmit="return confirm('¿Seguro de eliminar este Computador?')"  method="post">
                                 @csrf
                                 
-                                <button type="submit" onclick="confirm('¿Seguro de eliminar este Computador?')" class="btn btn-danger">Eliminar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
                         </div>
 

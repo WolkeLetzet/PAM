@@ -12,7 +12,7 @@
                     <label for="marca" class="form-label">Marca</label>
                     <input type="text" list="marcasList" class="form-control" name="marca" id="marca" placeholder="Marca"
                         value="">
-                    <small id="helpId" class="form-text text-muted">Marca del Fabricante</small>
+                    <small  class="form-text text-muted">Marca del Fabricante</small>
                     <datalist id="marcasList">
                         @foreach ($marcas as $marca)
                             <option value="{{ $marca->marca }}"></option>
@@ -24,7 +24,7 @@
                 <div class="mb-3 col-6">
                     <label for="modelo" class="form-label">Modelo</label>
                     <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" value="">
-                    <small id="helpId" class="form-text text-muted">Modelo del Computador</small>
+                    <small  class="form-text text-muted">Modelo del Computador</small>
                 </div>
 
 
@@ -32,7 +32,7 @@
                     <label for="so" class="form-label">Sistema Operativo</label>
                     <input type="text" list="soList" class="form-control" name="so" id="so"
                         placeholder="Sistema Operativo" value="">
-                    <small id="helpId" class="form-text text-muted">Ejemplo: " Windows 10 "</small>
+                    <small  class="form-text text-muted">Ejemplo: " Windows 10 "</small>
                     <datalist id="soList">
                         @foreach ($sos as $so)
                             <option value="{{ $so->so }}"></option>
@@ -51,12 +51,8 @@
                         <div class="col">
                             <input type="text" class="form-control" name="almacenamiento" id="Almacenamiento"
                                 placeholder="Almacenamiento" value="">
-                            <small id="helpId" class="form-text text-muted">Ejemplo: " 500 GB "</small>
+                            <small  class="form-text text-muted">Ejemplo: " 500 GB "</small>
                         </div>
-
-                        
-                    
-
                 </div>
 
 
@@ -65,12 +61,25 @@
                     <label for="encargado" class="form-label">Encargado</label>
                     <input type="text" class="form-control" name="encargado" id="encargado" placeholder="Encargado"
                         value="">
-                    <small id="helpId" class="form-text text-muted">Persona a cargo del Computador</small>
+                    <small  class="form-text text-muted">Persona a cargo del Computador</small>
+                </div>
+                
+
+                <div class="mb-3 col-6">
+                    <label for="so_key" class="form-label">Key del Sitema Operativo</label>
+                    <input type="text" class="form-control" name="so_key" id="so_key" placeholder="" value="">
+                    <small  class="form-text text-muted">opcional</small>
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="office_key" class="form-label">Key de Microsoft Office</label>
+                    <input type="text" class="form-control" name="office_key" id="office_key" placeholder="" value="">
+                    <small  class="form-text text-muted">opcional</small>
                 </div>
                 <div class="mb-3 col-6">
                     <label for="fecha" class="form-label">Fecha</label>
                     <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" value="">
-                    <small id="helpId" class="form-text text-muted"></small>
+                    <small  class="form-text text-muted"></small>
                 </div>
 
             </div>

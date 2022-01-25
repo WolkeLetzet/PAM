@@ -38,6 +38,8 @@ class ComputadorFactory extends Factory
             'so'=>$sos[rand(0,count($sos)-1)],
             'almacenamiento'=>$this->faker->randomElement($almc).$disco[rand(0,1)],
             'estado'=>random_int(0,1),
+            'so_key'=>$this->faker->md5,
+            'office_key'=>$this->faker->md5,
             
 
             
