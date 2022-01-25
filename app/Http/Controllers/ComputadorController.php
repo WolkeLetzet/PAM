@@ -25,7 +25,9 @@ class ComputadorController extends Controller
             })->orWhere('encargado','LIKE',"%$search%")
             ->with('oficinas')
             ->with('tipo_usos')
-            ->with('comentarios')->paginate(10);
+            ->with('comentarios')
+            ->paginate(10);
+            $data->appends(['search'=>$search]);
         }
         else{
             $data = Computador::where('estado','=','1')

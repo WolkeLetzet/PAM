@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 @section('add-comment')
-    <link rel="stylesheet" type="text/css" href="/pruebas/resources/css/comentarios.css">
+    
 
 
     <div class="container-sm">
