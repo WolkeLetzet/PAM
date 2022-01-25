@@ -6,14 +6,14 @@
     $ar = null;
     $ar2 = null;
     foreach ($computer->oficinas as $oficina) {
-        # code...
+
         $ar[$i] = $oficina->id;
         $i++;
     }
     $i = 0;
     
     foreach ($computer->tipo_usos as $uso) {
-        # code...
+    
         $ar2[$i] = $uso->id;
         $i++;
     }
