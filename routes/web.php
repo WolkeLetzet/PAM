@@ -15,12 +15,13 @@ use App\Http\Controllers\ComputadorController;
 
 
 Route::get('/', function () {
-    return redirect('index');
-})->name('index');
+    return view('auth.login');
+})->name('login');
 
 
 Route::namespace('App\Http\Controllers')->group(function(){
     Route::resource('index','ComputadorController');
+    Route::get('comp/index','ComputadorController@index')->name('index');
     Route::get('comp/create',    'ComputadorController@create')->name('create');
     Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
     Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
@@ -45,3 +46,11 @@ Route::view('/kachipum', 'ppt.kachipum');
 
 
 
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

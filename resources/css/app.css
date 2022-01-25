@@ -1,13 +1,13 @@
-.choice{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-}
-body{
-    background-color: gray;
-}
-.choice img{
-    width: 200px;
-}
+.commentbox{
+
+   display: flex;
+   border: rgb(151, 151, 151) solid 1px;
+   opacity: 1;
+   border-radius: 5px;
+   padding: 1%;
+   margin-top: 0.5%;
+ }

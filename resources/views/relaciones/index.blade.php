@@ -2,6 +2,8 @@
 
 @section('table')
 
+<div class="container-fluid">
+
 
     
     <table class="table ">
@@ -77,5 +79,5 @@
         </div>
         
     </div>
-
+</div>
 @endsection
