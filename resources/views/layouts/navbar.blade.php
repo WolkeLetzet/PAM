@@ -17,22 +17,52 @@
 </head>
 <header>
 
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
             <!--LINK A INICIO--->
-            <div>
+            {{-- <div>
                 <span>
                     <a href="{{ route('index') }}" class="navbar-brand mb-0 h1">INICIO</a>
                 </span>
-            </div>
+            </div> --}}
 
         <!--Buscador---->
-            <form class="d-flex" >
+            {{-- <form class="d-flex" >
                 <input class="form-control me-2" name='search' type="search" placeholder="Buscar oficina o usuario" aria-label="Buscar">
                 <button class="btn btn-outline-dark" type="submit">Buscar</button>
+            </form> --}}
+ 
+            <!--Izaquierda-->
+            <ul class="navbar-nav me-auto">
+                <li> <a class="navbar-brand" href="{{route('index')}}">Inicio</a></li>
+            </ul>
+
+
+            <!--Derecha-->
+            <ul class="navbar-nav ms-auto">
+                
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li> <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                         {{ __('Logout') }}
+                     </a></li>
+                  </ul>
+                </li>
+
+              </ul>
+
+
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
             </form>
-
-
+            
         </div>
     </nav>
 </header>
