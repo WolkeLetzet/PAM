@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ComputadorController;
+
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,12 +17,13 @@ use App\Http\Controllers\ComputadorController;
 
 
 Route::get('/', function () {
-    return redirect('index');
-})->name('index');
+    return view('auth.login');
+})->name('log');
 
 
 Route::namespace('App\Http\Controllers')->group(function(){
     Route::resource('index','ComputadorController');
+    Route::get('comp/index','ComputadorController@index')->name('index');
     Route::get('comp/create',    'ComputadorController@create')->name('create');
     Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
     Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
@@ -45,3 +48,15 @@ Route::view('/kachipum', 'ppt.kachipum');
 
 
 
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
