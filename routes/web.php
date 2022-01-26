@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ComputadorController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +26,7 @@ Route::get('/', function () {
 
 Route::view('/kachipum', 'ppt.kachipum');
 
-
+//Rutas potegidas
 Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () {
         Route::resource('index', 'ComputadorController');
         Route::get('comp/index','ComputadorController@index')->name('index');
@@ -48,11 +47,11 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
         Route::get('comp/show/comment/add/{id}', 'ComputadorController@editarComentario')->name('editcomentario');
 
         Route::put('comp/show/comment/add/{id}', 'ComputadorController@updateComentario')->name('updateComentario');
-    });
+});
 
-    Route::view('comp/register', 'auth.register');
-Auth::routes();
+    Route::view('/register', 'auth.register');
 
 
+    Auth::routes();
 
 

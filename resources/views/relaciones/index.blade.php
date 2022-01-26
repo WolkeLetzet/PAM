@@ -2,7 +2,7 @@
 
 @section('table')
 
-<div class="row align-items-center">
+<div class="row ">
     <div class="col">
         <a href="{{ route('create') }}" class="btn btn-dark">Agregar</a>
     </div>

@@ -121,10 +121,7 @@
                                 </table>
 
                             </div>
-                            <!---
-         Nota: optimizar la vista crando un arreglo que guarde los id de los comentarios que vayan a hacer eliminados y que al momento de salir de la pagina usr el controlador para boorarlos
-         o crear una opcion que envie a una vista para elegir y eliminar comentarios
-        -->
+                            <!-- Comentarios -->
                             <div class="tab-pane fade" id="comments" role="tabpanel">
 
                                 @foreach ($computer->comentarios as $comentario)
