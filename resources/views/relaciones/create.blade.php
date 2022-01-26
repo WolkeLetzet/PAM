@@ -81,12 +81,17 @@
                     <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" value="">
                     <small  class="form-text text-muted"></small>
                 </div>
+                <div class="mb-3 col-6">
+                    <label for="codigo_inventario" class="form-label">Codigo de Inventario</label>
+                    <input type="text" class="form-control" name="codigo_inventario" id="codigo_inventario" placeholder="" value="">
+                    <small  class="form-text text-muted">opcional</small>
+                </div>
 
             </div>
 
             <div class="row">
 
-
+{{-- Oficinas del Computador --}}
                 <div class="col">
                     <h6>Elija a que oficina(s) pertenece el Computador</h6>
                     @foreach ($oficinas as $oficina)
@@ -105,7 +110,7 @@
 
                 </div>
 
-
+        {{-- Usos del Computador --}}
                 <div class="col">
                     <h6>Elija que Uso(s) tiene, tuvo o tendra</h6>
                     @foreach ($tipo_usos as $uso)
@@ -131,7 +136,7 @@
 
 
 
-
+            {{-- Botones --}}
 
             <div id="buttons" class="row">
                 <div>

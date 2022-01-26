@@ -2,7 +2,16 @@
 
 @section('table')
 
-@include('relaciones.search-bar')
+<div class="row align-items-center">
+    <div class="col">
+        <a href="{{ route('create') }}" class="btn btn-dark">Agregar</a>
+    </div>
+    <div class="col">
+        @include('relaciones.search-bar')
+    </div>
+</div>
+
+
     
     <table class="table ">
         <thead>
@@ -71,11 +80,6 @@
     <div class="row">
         {{$computers->links()}}
     </div>
-    <div class="row justify-contain-center">
-        <div class="col">
-            <a href="{{ route('create') }}" class="btn btn-dark">Agregar</a>
-        </div>
-        
-    </div>
+    
 
 @endsection

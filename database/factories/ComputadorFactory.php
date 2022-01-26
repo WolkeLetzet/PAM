@@ -40,10 +40,6 @@ class ComputadorFactory extends Factory
             'estado'=>random_int(0,1),
             'so_key'=>$this->faker->md5,
             'office_key'=>$this->faker->md5,
-            
-
-            
-            
             'encargado' =>$idd
         ];
     }

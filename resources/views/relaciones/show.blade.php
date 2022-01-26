@@ -33,7 +33,7 @@
 
                                 <table class="table" style="width:70%">
 
-
+                                    
                                     <tr>
                                         <th>Marca</th>
                                         <td>{{ $computer->marca }}</td>
@@ -113,6 +113,10 @@
                                         <td>{{ date('d-m-Y', strtotime($computer->fecha)) }}</td>
 
                                     </tr>
+                                    <tr>
+                                        <th>Codigo de Inventario</th>
+                                        <td>{{$computer->codigo_inventario}}</td>
+                                    </tr>
 
                                 </table>
 
@@ -154,12 +158,14 @@
                                 <a class="btn btn-dark" href="{{ route('edit', $computer->id) }}"
                                     role="button">Editar</a>
                                 <a class="btn btn-secondary" href="{{ route('addcomentario', $computer->id) }}"> Agregar Comentario </a>
-
-                            </div>
-                            <form class="col-2" action="{{ route('destroy', $computer->id) }}" onsubmit="return confirm('¿Seguro de eliminar este Computador?')"  method="post">
-                                @csrf
                                 
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </div>
+                            <div class="col-sm-1">
+                                <button form="computer-delete-form" type="submit" class="btn btn-danger">Eliminar</button>
+                            </div>
+                            
+                            <form id="computer-delete-form" class="col-2" action="{{ route('destroy', $computer->id) }}" onsubmit="return confirm('¿Seguro de eliminar este Computador?')"  method="post">
+                                @csrf
                             </form>
                         </div>
 

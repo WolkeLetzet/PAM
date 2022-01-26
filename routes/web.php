@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
+
+    if(Auth::check()){
+        return redirect(route('index'));
+    }
     return view('auth.login');
 })->name('login');
 
@@ -45,10 +49,10 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
 
         Route::put('comp/show/comment/add/{id}', 'ComputadorController@updateComentario')->name('updateComentario');
     });
+
+    Route::view('comp/register', 'auth.register');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
 

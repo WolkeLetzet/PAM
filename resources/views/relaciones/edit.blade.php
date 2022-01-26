@@ -6,14 +6,12 @@
     $ar = null;
     $ar2 = null;
     foreach ($computer->oficinas as $oficina) {
-
         $ar[$i] = $oficina->id;
         $i++;
     }
     $i = 0;
     
     foreach ($computer->tipo_usos as $uso) {
-    
         $ar2[$i] = $uso->id;
         $i++;
     }
@@ -85,14 +83,16 @@
 
                 <div class="mb-3 col-6">
                     <label for="so_key" class="form-label">Key del Sitema Operativo</label>
-                    <input type="text" class="form-control" name="so_key" id="so_key" placeholder="" value="{{$computer->so_key}}">
-                    <small  class="form-text text-muted">opcional</small>
+                    <input type="text" class="form-control" name="so_key" id="so_key" placeholder=""
+                        value="{{ $computer->so_key }}">
+                    <small class="form-text text-muted">opcional</small>
                 </div>
 
                 <div class="mb-3 col-6">
                     <label for="office_key" class="form-label">Key de Microsoft Office</label>
-                    <input type="text" class="form-control" name="office_key" id="office_key" placeholder="" value="{{$computer->office_key}}">
-                    <small  class="form-text text-muted">opcional</small>
+                    <input type="text" class="form-control" name="office_key" id="office_key" placeholder=""
+                        value="{{ $computer->office_key }}">
+                    <small class="form-text text-muted">opcional</small>
                 </div>
 
                 <div class="mb-3 col-6">
@@ -101,7 +101,18 @@
                         value="{{ $computer->fecha }}">
                     <small id="helpId" class="form-text text-muted"></small>
                 </div>
+
+
+                <div class="mb-3 col-6">
+                    <label for="codigo_inventario" class="form-label">Codigo de Inventario</label>
+                    <input type="text" class="form-control" name="codigo_inventario" id="codigo_inventario" placeholder=""
+                        value="{{ $computer->codigo_inventario }}">
+                    <small class="form-text text-muted">opcional</small>
+                </div>
+
+
             </div>
+
 
             <div class="row">
 
@@ -117,13 +128,12 @@
                             <div class="form-check">
 
                                 <input class="form-check-input" type="checkbox" name="oficinas[]"
-                                    id="oficina{{ $oficina->id }}" value="{{ $oficina->id }}"
-                                @if ($ar)
-                                    @if (in_array($oficina->id, $ar))
-                                        checked
-                                    @endif
+                                    id="oficina{{ $oficina->id }}" value="{{ $oficina->id }}" @if ($ar)
+                                @if (in_array($oficina->id, $ar))
+                                    checked
                                 @endif
-                                >
+                        @endif
+                        >
                         <label class="form-check-label" for="oficina{{ $oficina->id }}">
                             {{ $oficina->nombre }}
                         </label>
@@ -168,17 +178,17 @@
 
 
 
-<div>
-    <button type="submit" class="btn btn-dark">Submit</button>
-    <button type="reset" class="btn btn-secondary">Reset</button>
-    <a href="{{ route('index') }}" class="btn btn-danger">Cancel</a>
+    <div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+        <a href="{{ route('index') }}" class="btn btn-danger">Cancel</a>
 
-</div>
-    
+    </div>
+
     </form>
 
 
-</div>
+    </div>
 
 
 @endsection

@@ -1,9 +1,8 @@
 @extends('layouts.navbar')
 
 @section('add-comment')
-    <link rel="stylesheet" type="text/css" href="/pruebas/resources/css/comentarios.css">
-
-
+    
+    <!-- Comentario para Editar -->
     <div class="container-sm">
         <div class="row" style="padding-bottom: 20px">
             <form class="needs-validation" method="POST" action="">
@@ -24,7 +23,7 @@
 
             </form>
         </div>
-
+        <!-- Demas Comentarios -->
         <h6>Comentarios</h6>
         @foreach ($computador->comentarios as $comment)
             @if ($comment->id != $comentario->id)

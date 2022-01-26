@@ -25,6 +25,7 @@ class CreateComputador extends Migration
             $table->string('so_key')->nullable();
             $table->string('office_key')->nullable();
             $table->boolean('estado')->default(true);
+            $table->string('codigo_inventario')->nullable();
             $table->timestamps();
 
         });
