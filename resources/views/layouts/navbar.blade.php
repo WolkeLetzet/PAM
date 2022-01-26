@@ -69,6 +69,7 @@
 
     <div class="container-fluid">
         @yield('content')
+        @yield('profile')
         
         @yield('table'){{-- Tabla de datos--}}
 

@@ -47,11 +47,14 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
         Route::get('comp/show/comment/add/{id}', 'ComputadorController@editarComentario')->name('editcomentario');
 
         Route::put('comp/show/comment/add/{id}', 'ComputadorController@updateComentario')->name('updateComentario');
+        Route::get('comp/imprimir/{id}', 'ComputadorController@imprimir')->name('imprimirCompu');
 });
 
     Route::view('/register', 'auth.register');
-
+    Route::view('/confirm', 'auth.passwords.confirm');
+    Route::view('/email', 'auth.passwords.email');
+    Route::view('/reset', 'auth.passwords.reset');
 
     Auth::routes();
 
-
+    

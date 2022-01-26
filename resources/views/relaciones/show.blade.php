@@ -1,6 +1,7 @@
 @extends('layouts.navbar')
 
 @section('show-computer')
+<link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/pruebas/resources/css/comentarios.css">
 
 
@@ -152,6 +153,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col">
+                                <a class="btn btn-primary" href="{{route('imprimirCompu',$computer->id)}}">Imprimir</a>
                                 <a class="btn btn-dark" href="{{ route('edit', $computer->id) }}"
                                     role="button">Editar</a>
                                 <a class="btn btn-secondary" href="{{ route('addcomentario', $computer->id) }}"> Agregar Comentario </a>

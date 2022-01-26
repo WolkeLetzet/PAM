@@ -8,6 +8,8 @@ use \App\Models\Oficina;
 use App\Models\Comentario;
 use App\Models\TipoUso;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class ComputadorController extends Controller
 {
@@ -42,6 +44,14 @@ class ComputadorController extends Controller
 
         return view('relaciones.index')->with('computers', $data);
     }
+
+    public function imprimir($id)
+    {
+        $computer=Computador::find($id);
+        $pdf= PDF::loadView('relaciones.print_comp',compact('computer'));
+        return $pdf->download('invoice.pdf');
+    }
+
 
     /**
      * Show the form for creating a new resource.
