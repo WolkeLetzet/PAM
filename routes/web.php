@@ -52,14 +52,15 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
     Route::get('comp/imprimir/{id}', 'ComputadorController@imprimir')->name('imprimirCompu');
     Route::get('my/forgeOfGods/{id}', 'UserController@forgeOfGods')->name('forgeOfGods');
     Route::get('user/profile', 'UserController@profile')->name('user-profile');
-    Route::view('user/settings/', 'user.setting')->name('settings-user');
+    //Route::view('user/settings/', 'user.setting')->name('settings-user');
 
     Route::group(['middleware' => ['role:admin']], function () {
         //
+
         Route::get('user/new/user/', 'UserController@crearUsuario')->name('create-user');
         Route::get('user/all/users', 'UserController@showAllUsers')->name('all-user');
         Route::post('user/save/user', 'UserController@storeUsuario')->name('save-user');
-
+        Route::get('users/setting/admin', 'UserController@setRoles' )->name('setting-roles');
    
     });
     

@@ -6,7 +6,7 @@
          <div class="card-header ">
             <div class="row  justify-content-end">
                <div class="col-1">
-                  <a id="edit-roles" href="{{ route('settings-user') }}">
+                  <a id="edit-roles" href="{{ route('setting-roles') }}">
                      <i class="bi bi-gear-fill"></i>
                   </a>
                </div>

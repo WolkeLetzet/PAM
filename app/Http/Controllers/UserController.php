@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Redirect;
@@ -67,6 +68,13 @@ class UserController extends Controller
         
 
         return view('user.admin.new-user')->with('flag',true);
+    }
+
+
+    public function setRoles()
+    {
+        return view('user.admin.setting')->with('users',User::all())
+                                        ->with('roles',Role::get('name'));
     }
 
     

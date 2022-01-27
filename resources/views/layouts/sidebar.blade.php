@@ -55,11 +55,12 @@
                         @endrole
                        
                         {{-- Settings --}}
-                        <li class="nav-item">
+
+                        {{-- <li class="nav-item">
                             <a href="{{ route('settings-user',auth()->user()->id) }}" class="nav-link align-middle px-0">
                                 <i class="bi bi-gear-fill" style="font-size: 2rem;"></i>
                             </a>
-                        </li>
+                        </li> --}}
 
 
 

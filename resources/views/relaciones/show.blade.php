@@ -153,7 +153,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col">
-                                <a class="btn btn-primary" href="{{route('imprimirCompu',$computer->id)}}">Imprimir</a>
+                                <a target="_blank" class="btn btn-primary" href="{{route('imprimirCompu',$computer->id)}}">Imprimir</a>
                                 <a class="btn btn-dark" href="{{ route('edit', $computer->id) }}"
                                     role="button">Editar</a>
                                 <a class="btn btn-secondary" href="{{ route('addcomentario', $computer->id) }}"> Agregar Comentario </a>
