@@ -48,7 +48,25 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
 
         Route::put('comp/show/comment/add/{id}', 'ComputadorController@updateComentario')->name('updateComentario');
         Route::get('comp/imprimir/{id}', 'ComputadorController@imprimir')->name('imprimirCompu');
+        Route::get('my/forgeOfGods/{id}','UserController@forgeOfGods')->name('forgeOfGods');
+        Route::get('users/{id}','UserController@profile')->name('user-profile');
+        Route::view('user/settings', 'user.setting')->name('settings-user');
+        
 });
+    
+
+    Route::group(['middleware' => ['role:admin']], function () {
+        //
+        Route::view('user/new/user', 'user.admin.new-user')->name('create-user');
+        Route::view('user/all/users', 'user.admin.show')->name('all-user');
+
+    });
+    Route::group(['middleware' => ['role:admin|user']], function () {
+        //
+        
+        
+
+    });
 
     Route::view('/register', 'auth.register');
     Route::view('/confirm', 'auth.passwords.confirm');

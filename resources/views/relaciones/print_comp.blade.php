@@ -1,4 +1,5 @@
 <div class="container">
+    <img class="logo-muni" src="https://ligup-v2.s3-sa-east-1.amazonaws.com/quintero/media/quinterologo-01.png" alt="">
     <h1>{{ $computer->marca.' '. $computer->modelo }}</h1>
     <table class="table">
         <tr>
@@ -151,6 +152,9 @@
         padding: 1%;
         margin-top: 0.5%;
 
+    }
+    img{
+        width: 200px;
     }
 
 </style>

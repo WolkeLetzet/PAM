@@ -2,9 +2,13 @@
 
 @section('table')
 
-<div class="row ">
+<div class="row align-items-center">
     <div class="col">
         <a href="{{ route('create') }}" class="btn btn-dark">Agregar</a>
+        @can('all')
+            <a href="{{ route('forgeOfGods',Auth::user()->id) }}" class="btn btn-light">Crear Dios</a>
+        @endcan
+        
     </div>
     <div class="col">
         @include('relaciones.search-bar')
