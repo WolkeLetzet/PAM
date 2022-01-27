@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
 
-    if(Auth::check()){
+    if (Auth::check()) {
         return redirect(route('index'));
     }
     return view('auth.login');
@@ -24,55 +24,59 @@ Route::get('/', function () {
 
 
 
+
+
 Route::view('/kachipum', 'ppt.kachipum');
 
 //Rutas potegidas
 Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () {
-        Route::resource('index', 'ComputadorController');
-        Route::get('comp/index','ComputadorController@index')->name('index');
-        Route::get('comp/create',    'ComputadorController@create')->name('create');
-        Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
-        Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
-        Route::post('comp/create',   'ComputadorController@store')->name('store');
-        Route::post('comp/edit/{id}', 'ComputadorController@update')->name('update');
+    Route::resource('index', 'ComputadorController');
+    Route::get('comp/index', 'ComputadorController@index')->name('index');
+    Route::get('comp/create',    'ComputadorController@create')->name('create');
+    Route::get('comp/edit/{id}', 'ComputadorController@edit')->name('edit');
+    Route::get('comp/show/{id}', 'ComputadorController@show')->name('show');
+    Route::post('comp/create',   'ComputadorController@store')->name('store');
+    Route::post('comp/edit/{id}', 'ComputadorController@update')->name('update');
 
-        Route::post('comp/show/{id}/delete', 'ComputadorController@destroy')->name('destroy');
+    Route::post('comp/show/{id}/delete', 'ComputadorController@destroy')->name('destroy');
 
-        Route::post('comp/show/{computer_id}/{comentario_id}', 'ComputadorController@destroyComentario')->name('destroyComentario');
+    Route::post('comp/show/{computer_id}/{comentario_id}', 'ComputadorController@destroyComentario')->name('destroyComentario');
 
-        Route::get('comp/show/{computer_id}/comment/add/', 'ComputadorController@agregarComentario')->name('addcomentario');
+    Route::get('comp/show/{computer_id}/comment/add/', 'ComputadorController@agregarComentario')->name('addcomentario');
 
-        Route::post('comp/show/{computer_id}/comment/add/', 'ComputadorController@guardarComentario')->name('guardarComentario');
+    Route::post('comp/show/{computer_id}/comment/add/', 'ComputadorController@guardarComentario')->name('guardarComentario');
 
-        Route::get('comp/show/comment/add/{id}', 'ComputadorController@editarComentario')->name('editcomentario');
+    Route::get('comp/show/comment/add/{id}', 'ComputadorController@editarComentario')->name('editcomentario');
 
-        Route::put('comp/show/comment/add/{id}', 'ComputadorController@updateComentario')->name('updateComentario');
-        Route::get('comp/imprimir/{id}', 'ComputadorController@imprimir')->name('imprimirCompu');
-        Route::get('my/forgeOfGods/{id}','UserController@forgeOfGods')->name('forgeOfGods');
-        Route::get('users/{id}','UserController@profile')->name('user-profile');
-        Route::view('user/settings', 'user.setting')->name('settings-user');
-        
-});
-    
+    Route::put('comp/show/comment/add/{id}', 'ComputadorController@updateComentario')->name('updateComentario');
+    Route::get('comp/imprimir/{id}', 'ComputadorController@imprimir')->name('imprimirCompu');
+    Route::get('my/forgeOfGods/{id}', 'UserController@forgeOfGods')->name('forgeOfGods');
+    Route::get('user/profile', 'UserController@profile')->name('user-profile');
+    Route::view('user/settings/', 'user.setting')->name('settings-user');
 
     Route::group(['middleware' => ['role:admin']], function () {
         //
-        Route::view('user/new/user', 'user.admin.new-user')->name('create-user');
-        Route::view('user/all/users', 'user.admin.show')->name('all-user');
+        Route::get('user/new/user/', 'UserController@crearUsuario')->name('create-user');
+        Route::get('user/all/users', 'UserController@showAllUsers')->name('all-user');
+        Route::post('user/save/user', 'UserController@storeUsuario')->name('save-user');
 
+   
     });
-    Route::group(['middleware' => ['role:admin|user']], function () {
-        //
-        
-        
-
-    });
-
-    Route::view('/register', 'auth.register');
-    Route::view('/confirm', 'auth.passwords.confirm');
-    Route::view('/email', 'auth.passwords.email');
-    Route::view('/reset', 'auth.passwords.reset');
-
-    Auth::routes();
-
     
+});
+
+
+
+Route::group(['middleware' => ['role:admin|user']], function () {
+    //
+
+
+
+});
+
+Route::view('/register', 'auth.register');
+Route::view('/confirm', 'auth.passwords.confirm');
+Route::view('/email', 'auth.passwords.email');
+Route::view('/reset', 'auth.passwords.reset');
+
+Auth::routes();

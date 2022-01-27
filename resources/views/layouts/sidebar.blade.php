@@ -24,13 +24,22 @@
 
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-center navigation"
                         id="menu">
+
+                        {{-- HOME --}}
                         <li class="nav-item ">
                             <a href="{{ route('index') }}" class="nav-link align-middle px-0">
                                 <i class="bi bi-house" style="font-size: 2rem;"></i>
                             </a>
                         </li>
+                        <hr>
 
-
+                             {{-- Perfil --}}
+                             <li class="nav-item">
+                                <a href="{{ route('user-profile', auth()->user()->id) }}"
+                                    class="nav-link align-middle px-0">
+                                    <i class="bi bi-person-circle" style="font-size: 2rem;"></i>
+                                </a>
+                            </li>
                         @role('admin')
                             {{-- Ususarios --}}
                             <li class="nav-item ">
@@ -44,16 +53,10 @@
                                 </a>
                             </li>
                         @endrole
-
-                        <li class="nav-item">
-                            <a href="{{ route('user-profile', auth()->user()->id) }}"
-                                class="nav-link align-middle px-0">
-                                <i class="bi bi-person-circle" style="font-size: 2rem;"></i>
-                            </a>
-                        </li>
+                       
                         {{-- Settings --}}
                         <li class="nav-item">
-                            <a href="{{ route('settings-user') }}" class="nav-link align-middle px-0">
+                            <a href="{{ route('settings-user',auth()->user()->id) }}" class="nav-link align-middle px-0">
                                 <i class="bi bi-gear-fill" style="font-size: 2rem;"></i>
                             </a>
                         </li>

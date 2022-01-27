@@ -1,7 +1,11 @@
 @extends('layouts.sidebar')
 
 @section('create-user')
-
+   @if ($flag)
+   <div class="alert alert-success" role="alert">
+     Usuario Creado
+    </div>
+   @endif
 
     <div class="container reg-container">
         <div class="row justify-content-center">
@@ -10,7 +14,7 @@
                     <div class="card-header">Registrar Nuevo Ususario</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('save-user') }}">
                             @csrf
 
                             <div class="row mb-3">
@@ -82,6 +86,9 @@
                                     </button>
                                 </div>
                             </div>
+
+
+                            
                         </form>
                     </div>
                 </div>
