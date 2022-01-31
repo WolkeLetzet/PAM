@@ -1,11 +1,7 @@
 @extends('layouts.sidebar')
 
 @section('create-user')
-   @if ($flag)
-   <div class="alert alert-success" role="alert">
-     Usuario Creado
-    </div>
-   @endif
+    
 
     <div class="container reg-container">
         <div class="row justify-content-center">
@@ -14,6 +10,11 @@
                     <div class="card-header">Registrar Nuevo Ususario</div>
 
                     <div class="card-body">
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                         <form method="POST" action="{{ route('save-user') }}">
                             @csrf
 
@@ -33,8 +34,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('E-Mail') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -59,7 +59,7 @@
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong></strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -75,8 +75,19 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-3 justify-content-center">
+                                @foreach ($roles as $rol)
+                                    <div class="col-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="roles[]" type="checkbox"
+                                                value="{{ $rol->name }}" id="{{$rol->name}}">
+                                            <label class="form-check-label" for="{{$rol->name}}">
+                                                {{ $rol->name }}
+                                            </label>
+                                        </div>
+                                    </div>
 
+                                @endforeach
                             </div>
 
                             <div class="row mb-0">
@@ -88,7 +99,7 @@
                             </div>
 
 
-                            
+
                         </form>
                     </div>
                 </div>

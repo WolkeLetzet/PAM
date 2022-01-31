@@ -6,7 +6,7 @@
          <div class="card-header ">
             <div class="row  justify-content-end">
                <div class="col-1">
-                  <a id="edit-roles" href="{{ route('setting-roles') }}">
+                  <a id="edit-roles" href="{{route('setting-roles')}}">
                      <i class="bi bi-gear-fill"></i>
                   </a>
                </div>
@@ -14,7 +14,7 @@
             
          </div>
             <div class="card-body">
-                <div class="card-text">
+                <div class="card-text overflow-scroll" style="height:  450px;">
                     <table class="table">
                         <thead>
                            <tr>

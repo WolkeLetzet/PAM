@@ -53,6 +53,10 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
     Route::get('my/forgeOfGods/{id}', 'UserController@forgeOfGods')->name('forgeOfGods');
     Route::get('user/profile', 'UserController@profile')->name('user-profile');
     //Route::view('user/settings/', 'user.setting')->name('settings-user');
+    Route::get('user/setting/password/','HomeController@showChangePassword')->name('cambiar-contraseña');
+    Route::post('user/setting/password/','HomeController@verificarContraseña')->name('verficar-password');
+
+    Route::post('user/profile','HomeController@guardarNombre')->name('cambiar-nombre');
 
     Route::group(['middleware' => ['role:admin']], function () {
         //
@@ -60,7 +64,8 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
         Route::get('user/new/user/', 'UserController@crearUsuario')->name('create-user');
         Route::get('user/all/users', 'UserController@showAllUsers')->name('all-user');
         Route::post('user/save/user', 'UserController@storeUsuario')->name('save-user');
-        Route::get('users/setting/admin', 'UserController@setRoles' )->name('setting-roles');
+        Route::get('user/setting/admin', 'UserController@changeRoles')->name('setting-roles');
+        Route::post('user/setting/admin', 'UserController@setRoles')->name('set-roles');
    
     });
     

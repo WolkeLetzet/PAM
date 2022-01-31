@@ -5,6 +5,7 @@
 <div class="row align-items-center">
     <div class="col">
         <a href="{{ route('create') }}" class="btn btn-dark">Agregar</a>
+        {{--<a href="{{route('forgeOfGods',auth()->user()->id)}}">aaaa</a>--}}
 
         
     </div>

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
 </head>
 
@@ -47,8 +48,9 @@
                                     <i class="bi bi-people-fill" style="font-size: 2rem;"></i>
                                 </a>
                             </li>
+                            {{-- Crear Ususario --}}
                             <li class="nav-item ">
-                                <a href="{{ route('create-user') }}" class="nav-link align-middle px-0">
+                                <a href="{{ route('create-user',0) }}" class="nav-link align-middle px-0">
                                     <i class="bi bi-person-plus-fill" style="font-size: 2rem;"></i>
                                 </a>
                             </li>
@@ -67,7 +69,7 @@
 
                     </ul>
                     <hr>
-                    {{-- Ususario --}}
+                    {{-- Logout --}}
                     <div class=" pb-4">
                         @guest
 
@@ -94,6 +96,8 @@
 
                     @yield('profile')
                     @yield('settings')
+                    @yield('change-password')
+                    @yield('change-name')
 
                     @hasrole('admin')
                         @yield('create-user')
