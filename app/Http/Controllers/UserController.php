@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Faker\Generator;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -45,8 +48,9 @@ class UserController extends Controller
 
     public function crearUsuario($flag = false)
     {
+        $faker=Container::getInstance()->make(Generator::class);
 
-        return view('user.admin.new-user')->with('flag', $flag)->with('roles',Role::all('id','name'));
+        return view('user.admin.new-user')->with('roles',Role::all('id','name'))->with('example',$faker);
     }
 
 
@@ -55,11 +59,7 @@ class UserController extends Controller
 
 
 
-        $req->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $this->userRegValidator($req->all())->validate();
 
         $user = User::create([
             'name' => $req->get('name'),
@@ -99,8 +99,21 @@ class UserController extends Controller
                 $user->syncRoles([]);
             }
         }
-        return redirect(route('all-user'));
+        return redirect(route('all-user'))->with('success','Cambios Hechos con Exito');
     }
+    public function userRegValidator($data)
+    {
+        return Validator::make($data,[
+            "name"=>'required|string|max:255',
+            "email"=>'required|string|email|max:255|unique:users',
+            "password"=>['required','string','min:8','confirmed']
 
+        ],[
+            "required"=>"Este campo es obligatorio",
+            "min"=> "La contraseña debe medir almenos :min caracteres",
+            "confirmed"=>"Las contraseñas no coinciden",
+            "unique"=>"Este :attribute ya esta en uso",
+        ]);
+    }
    
 }

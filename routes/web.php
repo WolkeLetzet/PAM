@@ -80,9 +80,5 @@ Route::group(['middleware' => ['role:admin|user']], function () {
 
 });
 
-Route::view('/register', 'auth.register');
-Route::view('/confirm', 'auth.passwords.confirm');
-Route::view('/email', 'auth.passwords.email');
-Route::view('/reset', 'auth.passwords.reset');
 
 Auth::routes();

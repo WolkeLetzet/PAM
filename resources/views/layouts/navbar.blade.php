@@ -13,6 +13,8 @@
  
     <!-- Mis estilos -->
     <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <title>Computadores</title>
 </head>

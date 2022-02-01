@@ -22,9 +22,9 @@
                             <div>
                                 <tbody>
                                     @if (auth()->user()->hasRole('admin') && $users)
-                                        <form id="roleForm"  action="{{ route('set-roles') }}" method="post">
+                                        <form id="roleForm" action="{{ route('set-roles') }}" method="post">
                                             @php
-                                                $i=0;
+                                                $i = 0;
                                             @endphp
                                             @foreach ($users as $user)
                                                 <tr>
@@ -34,12 +34,16 @@
 
 
                                                         @foreach ($roles as $rol)
-                                                            
+
                                                             @csrf
                                                             <div class="form-check">
-                                                                <input class="form-check-input" name="roles[{{$user->email}}][]"   type="checkbox" value="{{ $rol->name }}" id="{{ $rol->name.$i }}" @if ($user->hasRole($rol->name)) checked  @endif>
+                                                                <input class="form-check-input ck"
+                                                                    name="roles[{{ $user->email }}][]" type="checkbox"
+                                                                    value="{{ $rol->name }}" id="{{ $rol->name . $i }}"
+                                                                    @if ($user->hasRole($rol->name)) checked  @endif>
 
-                                                                <label class="form-check-label" for="{{ $rol->name.$i }}">
+                                                                <label class="form-check-label"
+                                                                    for="{{ $rol->name . $i }}">
                                                                     {{ $rol->name }}
                                                                 </label>
                                                             </div>
@@ -67,11 +71,40 @@
                 </div>
                 <div class="card-footer">
 
-                    <button id="guardar" form="roleForm" type="submit" class="btn btn-primary">Guardar</button>
+
+                    <div class="row justify-content-between">
+                        <div class="col text-start">
+                            <button id="guardar" form="roleForm" type="submit" class="btn btn-primary">Guardar</button>
+
+                        </div>
+                        <div class="col-2">
+
+                            <input type="checkbox" class="form-check-input" id="selectAll">
+                            <label class="form-check-label" for="selectAll"> Seleccionar Todos </label>
+
+                        </div>
+
+
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
 
     </div>
+    <script>
+        $(document).ready(function() {
+            $("div input#selectAll").click(function(e) {
+                if ($(this).is(":checked")) {
+                    $(".ck:checkbox:not(:checked)").attr("checked", "checked");
+                } else {
+                    $(".ck:checkbox:checked").removeAttr("checked");
+                }
 
+            });
+
+        });
+    </script>
 @endsection

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"> </script>
 </head>
 
 <body>

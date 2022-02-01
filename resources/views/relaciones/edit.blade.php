@@ -142,6 +142,16 @@
                     @endforeach
 
                 @endisset
+                <div class="input-group">
+                    <label for="otraOficina" class="form-check-label input-group-text"> Otra </label>
+                    <div class="input-group-text">
+
+                        <input class="form-check-input mt-0" type="checkbox" id="otraOficina"
+                            aria-label="Checkbox for following text input">
+                    </div>
+                    <input type="text" class="form-control" name="newOficina" id="nuevaOficina" disabled>
+
+                </div>
 
 
             </div>
@@ -170,6 +180,15 @@
 
                 @endforeach
             @endisset
+            <div class="input-group">
+                <label for="otroUso" class="form-check-label input-group-text"> Otro </label>
+                <div class="input-group-text">
+
+                    <input class="form-check-input mt-0" type="checkbox" id="otroUso">
+                </div>
+                <input type="text" class="form-control" name="newUso" id="nuevoUso" disabled>
+
+            </div>
     </div>
 
 
@@ -190,5 +209,5 @@
 
     </div>
 
-
+    <script src="{{ asset('js/checkboxes.js') }}"></script>
 @endsection
