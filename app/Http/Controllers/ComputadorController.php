@@ -48,7 +48,7 @@ class ComputadorController extends Controller
     {
         $computer = Computador::find($id);
         $pdf = PDF::loadView('relaciones.print_comp', compact('computer'));
-        return $pdf->download('invoice.pdf');
+        return $pdf->stream('invoice.pdf');
     }
 
 

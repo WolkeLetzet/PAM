@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo =  'user/';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['role:admin']);
+        $this->middleware('guest');
     }
 
     /**
@@ -70,5 +70,4 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    
 }
