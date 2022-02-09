@@ -143,6 +143,9 @@ class ComputadorController extends Controller
     public function show($id)
     {
         $computer = Computador::find($id);
+        if($computer==null){
+            abort(404);
+        }
 
 
         return view('relaciones.show')->with('computer', $computer);
@@ -158,6 +161,10 @@ class ComputadorController extends Controller
     {
         //
         $computador = Computador::find($id);
+        if($computador==null){
+            abort(404);
+        }
+
         $oficinas = Oficina::all();
         $tipo_usos = TipoUso::all();
         $sos = DB::table('computadores')->select('so')->distinct()->get();
@@ -180,6 +187,10 @@ class ComputadorController extends Controller
     {
         //
         $computador = Computador::find($id);
+        if($computador==null){
+            abort(404);
+        }
+
         $computador->marca = $req->marca;
         $computador->so = $req->so;
         $computador->fecha = $req->fecha;
@@ -237,6 +248,10 @@ class ComputadorController extends Controller
     {
         //
         $computador = Computador::find($id);
+        if($computador==null){
+            abort(404);
+        }
+
         $computador->estado = false;
         $computador->save();
 
@@ -261,6 +276,9 @@ class ComputadorController extends Controller
     public function editarComentario($id)
     {
         $comentario = Comentario::find($id);
+        if($comentario==null){
+            abort(404);
+        }
         $computador = Computador::find($comentario->computador->id);
         return view('relaciones.edit_comentario')->with('comentario', $comentario)
             ->with('computador', $computador);
@@ -275,6 +293,9 @@ class ComputadorController extends Controller
     public function agregarComentario($id)
     {
         $computador = Computador::find($id);
+        if($computador==null){
+            abort(404);
+        }
 
         return view('relaciones.add_comentario')->with('comentarios', $computador->comentarios)->with('compu_id', $id);
     }
@@ -289,6 +310,9 @@ class ComputadorController extends Controller
     {
 
         $comentario = Comentario::find($id);
+        if($comentario==null){
+            abort(404);
+        }
         $comentario->comentario = $req->comentario;
         $comentario->save();
         return redirect(route('addcomentario', $comentario->computador_id));
