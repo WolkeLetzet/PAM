@@ -10,7 +10,7 @@
         
     </div>
     <div class="col">
-        @include('relaciones.search-bar')
+        @include('computador.search-bar')
     </div>
 </div>
 

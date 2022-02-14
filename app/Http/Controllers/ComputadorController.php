@@ -41,14 +41,14 @@ class ComputadorController extends Controller
 
 
 
-        return view('relaciones.index')->with('computers', $data);
+        return view('computador.index')->with('computers', $data);
     }
-
+/**IMPRIMIR */
     public function imprimir($id)
     {
         $computer = Computador::find($id);
-        $pdf = PDF::loadView('relaciones.print_comp', compact('computer'));
-        return $pdf->stream('invoice.pdf');
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('computador.print_comp', compact('computer'))->stream('invoice.pdf');
+        
     }
 
 
@@ -65,7 +65,7 @@ class ComputadorController extends Controller
         $tipo_usos = TipoUso::all();
         $marcas = DB::table('computadores')->select('marca')->distinct()->get();
         $sos = DB::table('computadores')->select('so')->distinct()->get();
-        return view('relaciones.create')->with('oficinas', $oficinas)
+        return view('computador.create')->with('oficinas', $oficinas)
             ->with('tipo_usos', $tipo_usos)
             ->with('marcas', $marcas)
             ->with('sos', $sos);
@@ -148,7 +148,7 @@ class ComputadorController extends Controller
         }
 
 
-        return view('relaciones.show')->with('computer', $computer);
+        return view('computador.show')->with('computer', $computer);
     }
 
     /**
@@ -170,7 +170,7 @@ class ComputadorController extends Controller
         $sos = DB::table('computadores')->select('so')->distinct()->get();
 
 
-        return view('relaciones.edit')->with('computer', $computador)
+        return view('computador.edit')->with('computer', $computador)
             ->with('oficinas', $oficinas)
             ->with('tipo_usos', $tipo_usos)
             ->with('sos', $sos);
@@ -280,7 +280,7 @@ class ComputadorController extends Controller
             abort(404);
         }
         $computador = Computador::find($comentario->computador->id);
-        return view('relaciones.edit_comentario')->with('comentario', $comentario)
+        return view('computador.edit_comentario')->with('comentario', $comentario)
             ->with('computador', $computador);
     }
 
@@ -297,7 +297,7 @@ class ComputadorController extends Controller
             abort(404);
         }
 
-        return view('relaciones.add_comentario')->with('comentarios', $computador->comentarios)->with('compu_id', $id);
+        return view('computador.add_comentario')->with('comentarios', $computador->comentarios)->with('compu_id', $id);
     }
 
     /**

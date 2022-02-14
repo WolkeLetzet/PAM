@@ -1,5 +1,16 @@
 <div class="container">
     {{-- <img class="logo-muni" src="https://ligup-v2.s3-sa-east-1.amazonaws.com/quintero/media/quinterologo-01.png" alt=""> --}}
+     {{-- <img class="logo-muni" src=" {{public_path('img/quinterologo.png')}}" alt="">
+    <div>
+        {{ URL::to('/') }}/img/quinterologo.png
+    </div>
+    <div>
+        {{url('/img/quinterologo.png')}}
+    </div>
+    <div>
+        {{public_path('img/quinterologo.png')}}
+    </div>
+     --}}
     
     <h1>{{ $computer->marca.' '. $computer->modelo }}</h1>
     <table class="table">

@@ -58,6 +58,7 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
 
     Route::post('user/profile','HomeController@guardarNombre')->name('cambiar-nombre');
 
+    //Rutas del Admin
     Route::group(['middleware' => ['role:admin']], function () {
         //
 
