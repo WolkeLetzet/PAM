@@ -193,6 +193,13 @@ class ComputadorController extends Controller
         if ($computador == null) {
             abort(404);
         }
+        
+        $req->validate([
+            'modelo'=>'required|max:255',
+            'fecha'=>'required|date',
+            'marca'=>'required|max:255'
+        ]);
+
         try {
 
 
