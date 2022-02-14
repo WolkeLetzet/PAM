@@ -11,6 +11,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -48,32 +49,34 @@ class UserController extends Controller
 
     public function crearUsuario($flag = false)
     {
-        $faker=Container::getInstance()->make(Generator::class);
+        $faker = Container::getInstance()->make(Generator::class);
 
-        return view('user.admin.new-user')->with('roles',Role::all('id','name'))->with('example',$faker);
+        return view('user.admin.new-user')->with('roles', Role::all('id', 'name'))->with('example', $faker);
     }
 
 
     public function storeUsuario(Request $req)
     {
-
-
-
         $this->userRegValidator($req->all())->validate();
 
-        $user = User::create([
-            'name' => $req->get('name'),
-            'email' => $req->get('email'),
-            'password' => Hash::make($req->get('password')),
-        ]);
-        if ($req->roles) {
-            $user->syncRoles($req->roles);
-        } else {
-            $user->assignRole('user');
+        try {
+
+            $user = User::create([
+                'name' => $req->get('name'),
+                'email' => $req->get('email'),
+                'password' => Hash::make($req->get('password')),
+            ]);
+            if ($req->roles) {
+                $user->syncRoles($req->roles);
+            } else {
+                $user->assignRole('user');
+            }
+
+
+            return redirect(route('create-user'))->with("success", "Usuario Creado Exitosamente");
+        } catch (Exception $e) {
+            return view('error.show', $e->getMessage());
         }
-
-
-        return redirect(route('create-user'))->with("success","Usuario Creado Exitosamente");
     }
 
 
@@ -89,31 +92,30 @@ class UserController extends Controller
     public function setRoles(Request $req)
     {
         $roles = $req->roles;
-        $users=User::all();
+        $users = User::all();
 
-        foreach($users as $user) { 
+        foreach ($users as $user) {
 
-            if (array_key_exists($user->email,$roles)) {
+            if (array_key_exists($user->email, $roles)) {
                 $user->syncRoles($roles[$user->email]);
-            }else{
+            } else {
                 $user->syncRoles([]);
             }
         }
-        return redirect(route('all-user'))->with('success','Cambios Hechos con Exito');
+        return redirect(route('all-user'))->with('success', 'Cambios Hechos con Exito');
     }
     public function userRegValidator($data)
     {
-        return Validator::make($data,[
-            "name"=>'required|string|max:255',
-            "email"=>'required|string|email|max:255|unique:users',
-            "password"=>['required','string','min:8','confirmed']
+        return Validator::make($data, [
+            "name" => 'required|string|max:255',
+            "email" => 'required|string|email|max:255|unique:users',
+            "password" => ['required', 'string', 'min:8', 'confirmed']
 
-        ],[
-            "required"=>"Este campo es obligatorio",
-            "min"=> "La contraseña debe medir almenos :min caracteres",
-            "confirmed"=>"Las contraseñas no coinciden",
-            "unique"=>"Este :attribute ya esta en uso",
+        ], [
+            "required" => "Este campo es obligatorio",
+            "min" => "La contraseña debe medir almenos :min caracteres",
+            "confirmed" => "Las contraseñas no coinciden",
+            "unique" => "Este :attribute ya esta en uso",
         ]);
     }
-   
 }

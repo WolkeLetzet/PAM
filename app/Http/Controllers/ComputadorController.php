@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Computador;
+use Exception;
+use App\Models\TipoUso;
 use \App\Models\Oficina;
 use App\Models\Comentario;
-use App\Models\TipoUso;
-use Illuminate\Support\Facades\DB;
+use App\Models\Computador;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 
 
 class ComputadorController extends Controller
@@ -43,12 +44,11 @@ class ComputadorController extends Controller
 
         return view('computador.index')->with('computers', $data);
     }
-/**IMPRIMIR */
+    /**IMPRIMIR */
     public function imprimir($id)
     {
         $computer = Computador::find($id);
         return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('computador.print_comp', compact('computer'))->stream('invoice.pdf');
-        
     }
 
 
@@ -79,10 +79,15 @@ class ComputadorController extends Controller
      */
     public function store(Request $req)
     {
-        //Recordatorio: Modificar el create para aceptar nuevas Oficinas y Tipos de Uso
-
 
         $computador = new Computador;
+
+        $req->validate([
+            'modelo'=>'required|max:255',
+            'fecha'=>'required|date',
+            'marca'=>'required|max:255'
+        ]);
+
         $computador->marca = $req->marca;
         $computador->so = $req->so;
         $computador->fecha = $req->fecha;
@@ -119,16 +124,14 @@ class ComputadorController extends Controller
                 $tipo_uso = TipoUso::find($usos_id);
                 $computador->tipo_usos()->attach($tipo_uso);
             }
-
-            
         }
         if ($req->comentario) {
 
-                $comentario = new Comentario;
-                $comentario->computador()->associate($computador);
-                $comentario->comentario = $req->comentario;
-                $comentario->save();
-            }
+            $comentario = new Comentario;
+            $comentario->computador()->associate($computador);
+            $comentario->comentario = $req->comentario;
+            $comentario->save();
+        }
 
 
         return redirect(route('show', $computador->id));
@@ -143,7 +146,7 @@ class ComputadorController extends Controller
     public function show($id)
     {
         $computer = Computador::find($id);
-        if($computer==null){
+        if ($computer == null) {
             abort(404);
         }
 
@@ -161,7 +164,7 @@ class ComputadorController extends Controller
     {
         //
         $computador = Computador::find($id);
-        if($computador==null){
+        if ($computador == null) {
             abort(404);
         }
 
@@ -187,55 +190,55 @@ class ComputadorController extends Controller
     {
         //
         $computador = Computador::find($id);
-        if($computador==null){
+        if ($computador == null) {
             abort(404);
         }
+        try {
 
-        $computador->marca = $req->marca;
-        $computador->so = $req->so;
-        $computador->fecha = $req->fecha;
-        $computador->encargado = $req->encargado;
-        $computador->modelo = $req->modelo;
-        $computador->ram = $req->ram;
-        $computador->codigo_inventario = $req->codigo_inventario;
 
-        $computador->save();
-        
-        if ($req->newOficina) {
-            $of = new Oficina;
-            $of->nombre = $req->newOficina;
-            $of->save();
-            $computador->oficinas()->attach($of);
-        }
-        if ($req->newUso) {
-            $newUso = new TipoUso;
-            $newUso->nombre = $req->newUso;
-            $newUso->save();
-            $computador->tipo_usos()->attach($newUso);
-        }
-        if ($req->oficinas) {
-            foreach ($req->oficinas as $oficina_id) {
-                # code...
-                $oficina = Oficina::find($oficina_id);
+            $computador->marca = $req->marca;
+            $computador->so = $req->so;
+            $computador->fecha = $req->fecha;
+            $computador->encargado = $req->encargado;
+            $computador->modelo = $req->modelo;
+            $computador->ram = $req->ram;
+            $computador->codigo_inventario = $req->codigo_inventario;
 
-                $computador->oficinas()->attach($oficina);
+            $computador->save();
+
+            if ($req->newOficina) {
+                $of = new Oficina;
+                $of->nombre = $req->newOficina;
+                $of->save();
+                $computador->oficinas()->attach($of);
             }
-        }
-        
+            if ($req->newUso) {
+                $newUso = new TipoUso;
+                $newUso->nombre = $req->newUso;
+                $newUso->save();
+                $computador->tipo_usos()->attach($newUso);
+            }
+            if ($req->oficinas) {
+                foreach ($req->oficinas as $oficina_id) {
+                    # code...
+                    $oficina = Oficina::find($oficina_id);
 
-        if ($req->tipo_usos) {
-            foreach ($req->tipo_usos as $usos_id) {
-                # code...
-                $tipo_uso = TipoUso::find($usos_id);
-                $computador->tipo_usos()->attach($tipo_uso);
+                    $computador->oficinas()->attach($oficina);
+                }
             }
 
-            
+
+            if ($req->tipo_usos) {
+                foreach ($req->tipo_usos as $usos_id) {
+                    # code...
+                    $tipo_uso = TipoUso::find($usos_id);
+                    $computador->tipo_usos()->attach($tipo_uso);
+                }
+            }
+            return redirect(route('show', $computador->id));
+        } catch (Exception $e) {
+            return view('error.show')->with('message', $e->getMessage());
         }
-
-
-
-        return redirect(route('show',$computador->id));
     }
 
     /**
@@ -248,7 +251,7 @@ class ComputadorController extends Controller
     {
         //
         $computador = Computador::find($id);
-        if($computador==null){
+        if ($computador == null) {
             abort(404);
         }
 
@@ -276,7 +279,7 @@ class ComputadorController extends Controller
     public function editarComentario($id)
     {
         $comentario = Comentario::find($id);
-        if($comentario==null){
+        if ($comentario == null) {
             abort(404);
         }
         $computador = Computador::find($comentario->computador->id);
@@ -293,7 +296,7 @@ class ComputadorController extends Controller
     public function agregarComentario($id)
     {
         $computador = Computador::find($id);
-        if($computador==null){
+        if ($computador == null) {
             abort(404);
         }
 
@@ -310,9 +313,12 @@ class ComputadorController extends Controller
     {
 
         $comentario = Comentario::find($id);
-        if($comentario==null){
+        if ($comentario == null) {
             abort(404);
         }
+        $req->validate([
+            'comentario' => 'max:255'
+        ]);
         $comentario->comentario = $req->comentario;
         $comentario->save();
         return redirect(route('addcomentario', $comentario->computador_id));
@@ -326,7 +332,9 @@ class ComputadorController extends Controller
 
     public function guardarComentario($computer_id, Request $req)
     {
-
+        $req->validate([
+            'comentario' => 'max:255'
+        ]);
         $comentario = new Comentario;
         $computador = Computador::find($computer_id);
         $comentario->comentario = $req->comentario;

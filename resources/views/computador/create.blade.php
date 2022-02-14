@@ -1,7 +1,6 @@
 @extends('layouts.navbar')
 
 @section('create-form')
-
     <div class="container-sm">
 
         <form action="{{ route('create') }}" method="POST">
@@ -10,27 +9,39 @@
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="marca" class="form-label">Marca</label>
-                    <input type="text" list="marcasList" class="form-control" name="marca" id="marca" placeholder="Marca"
-                        value="">
+                    <input type="text" list="marcasList" class="form-control @error('marca') is-invaid @enderror "
+                        name="marca" id="marca" placeholder="Marca" value="">
                     <small class="form-text text-muted">Marca del Fabricante</small>
                     <datalist id="marcasList">
                         @foreach ($marcas as $marca)
                             <option value="{{ $marca->marca }}"></option>
                         @endforeach
                     </datalist>
+
+                    @error('marca')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
 
                 <div class="mb-3 col-6">
                     <label for="modelo" class="form-label">Modelo</label>
-                    <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" value="">
+                    <input type="text" class="form-control @error('modelo') is-invaid @enderror" name="modelo" id="modelo"
+                        placeholder="Modelo" value="">
                     <small class="form-text text-muted">Modelo del Computador</small>
+                    @error('modelo')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
 
                 <div class="mb-3 col-6">
                     <label for="so" class="form-label">Sistema Operativo</label>
-                    <input type="text" list="soList" class="form-control" name="so" id="so"
+                    <input type="text" list="soList" class="form-control @error('so') is-invaid @enderror" name="so" id="so"
                         placeholder="Sistema Operativo" value="">
                     <small class="form-text text-muted">Ejemplo: " Windows 10 "</small>
                     <datalist id="soList">
@@ -38,20 +49,36 @@
                             <option value="{{ $so->so }}"></option>
                         @endforeach
                     </datalist>
+                    @error('so')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="mb-3 col-6">
                     <label for="ram" class="form-label">RAM</label>
-                    <input type="text" class="form-control" name="ram" id="ram" placeholder="RAM" value="">
+                    <input type="text" class="form-control @error('ram') is-invaid @enderror" name="ram" id="ram"
+                        placeholder="RAM" value="">
                     <small class="form-text text-muted">Ejemplo: " 4 GB "</small>
+                    @error('ram')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="mb-3 col-6">
                     <label for="almacenamiento" class="form-label">Almacenamiento</label>
 
                     <div class="col">
-                        <input type="text" class="form-control" name="almacenamiento" id="Almacenamiento"
-                            placeholder="Almacenamiento" value="">
+                        <input type="text" class="form-control @error('almacenamiento') is-invaid @enderror"
+                            name="almacenamiento" id="Almacenamiento" placeholder="Almacenamiento" value="">
                         <small class="form-text text-muted">Ejemplo: " 500 GB "</small>
+                        @error('almacenamiento')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
@@ -59,9 +86,14 @@
 
                 <div class="mb-3 col-6">
                     <label for="encargado" class="form-label">Encargado</label>
-                    <input type="text" class="form-control" name="encargado" id="encargado" placeholder="Encargado"
-                        value="">
+                    <input type="text" class="form-control  @error('encargado') is-invaid @enderror" name="encargado"
+                        id="encargado" placeholder="Encargado" value="">
                     <small class="form-text text-muted">Persona a cargo del Computador</small>
+                    @error('encargado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
 
@@ -77,9 +109,14 @@
                     <small class="form-text text-muted">opcional</small>
                 </div>
                 <div class="mb-3 col-6">
-                    <label for="fecha" class="form-label">Fecha</label>
+                    <label for="fecha" class="form-label @error('fecha') is-invaid @enderror">Fecha</label>
                     <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" value="">
                     <small class="form-text text-muted"></small>
+                    @error('fecha')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="mb-3 col-6">
                     <label for="codigo_inventario" class="form-label">Codigo de Inventario</label>
@@ -96,7 +133,6 @@
                 <div class="col">
                     <h6>Elija a que oficina(s) pertenece el Computador</h6>
                     @foreach ($oficinas as $oficina)
-
                         <div class="form-check">
 
                             <input class="form-check-input" type="checkbox" name="oficinas[]"
@@ -110,7 +146,7 @@
                     @endforeach
                     <br>
 
-                        {{-- Nueva Oficina --}}
+                    {{-- Nueva Oficina --}}
                     <div class="input-group">
                         <label for="otraOficina" class="form-check-label input-group-text"> Otra </label>
                         <div class="input-group-text">
@@ -129,7 +165,6 @@
                 <div class="col">
                     <h6>Elija que Uso(s) tiene, tuvo o tendra</h6>
                     @foreach ($tipo_usos as $uso)
-
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" name="tipo_usos[]" id="uso{{ $uso->id }}"
                                 value="{{ $uso->id }}">
@@ -137,10 +172,9 @@
                                 {{ $uso->nombre }}
                             </label>
                         </div>
-
                     @endforeach
 
-                            {{-- Nuevo Uso --}}
+                    {{-- Nuevo Uso --}}
                     <div class="input-group">
                         <label for="otroUso" class="form-check-label input-group-text"> Otro </label>
                         <div class="input-group-text">
