@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="marca" class="form-label">Marca</label>
-                    <input type="text" list="marcasList" class="form-control @error('marca') is-invaid @enderror "
+                    <input type="text" list="marcasList" class="form-control @error('marca') is-invalid @enderror "
                         name="marca" id="marca" placeholder="Marca" value="">
                     <small class="form-text text-muted">Marca del Fabricante</small>
                     <datalist id="marcasList">
@@ -28,7 +28,7 @@
 
                 <div class="mb-3 col-6">
                     <label for="modelo" class="form-label">Modelo</label>
-                    <input type="text" class="form-control @error('modelo') is-invaid @enderror" name="modelo" id="modelo"
+                    <input type="text" class="form-control @error('modelo') is-invalid @enderror" name="modelo" id="modelo"
                         placeholder="Modelo" value="">
                     <small class="form-text text-muted">Modelo del Computador</small>
                     @error('modelo')
@@ -41,7 +41,7 @@
 
                 <div class="mb-3 col-6">
                     <label for="so" class="form-label">Sistema Operativo</label>
-                    <input type="text" list="soList" class="form-control @error('so') is-invaid @enderror" name="so" id="so"
+                    <input type="text" list="soList" class="form-control @error('so') is-invalid @enderror" name="so" id="so"
                         placeholder="Sistema Operativo" value="">
                     <small class="form-text text-muted">Ejemplo: " Windows 10 "</small>
                     <datalist id="soList">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="mb-3 col-6">
                     <label for="ram" class="form-label">RAM</label>
-                    <input type="text" class="form-control @error('ram') is-invaid @enderror" name="ram" id="ram"
+                    <input type="text" class="form-control @error('ram') is-invalid @enderror" name="ram" id="ram"
                         placeholder="RAM" value="">
                     <small class="form-text text-muted">Ejemplo: " 4 GB "</small>
                     @error('ram')
@@ -71,7 +71,7 @@
                     <label for="almacenamiento" class="form-label">Almacenamiento</label>
 
                     <div class="col">
-                        <input type="text" class="form-control @error('almacenamiento') is-invaid @enderror"
+                        <input type="text" class="form-control @error('almacenamiento') is-invalid @enderror"
                             name="almacenamiento" id="Almacenamiento" placeholder="Almacenamiento" value="">
                         <small class="form-text text-muted">Ejemplo: " 500 GB "</small>
                         @error('almacenamiento')
@@ -86,7 +86,7 @@
 
                 <div class="mb-3 col-6">
                     <label for="encargado" class="form-label">Encargado</label>
-                    <input type="text" class="form-control  @error('encargado') is-invaid @enderror" name="encargado"
+                    <input type="text" class="form-control  @error('encargado') is-invalid @enderror" name="encargado"
                         id="encargado" placeholder="Encargado" value="">
                     <small class="form-text text-muted">Persona a cargo del Computador</small>
                     @error('encargado')
@@ -109,7 +109,7 @@
                     <small class="form-text text-muted">opcional</small>
                 </div>
                 <div class="mb-3 col-6">
-                    <label for="fecha" class="form-label @error('fecha') is-invaid @enderror">Fecha</label>
+                    <label for="fecha" class="form-label @error('fecha') is-invalid @enderror">Fecha</label>
                     <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" value="">
                     <small class="form-text text-muted"></small>
                     @error('fecha')

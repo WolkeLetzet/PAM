@@ -83,58 +83,70 @@ class ComputadorController extends Controller
         $computador = new Computador;
 
         $req->validate([
-            'modelo'=>'required|max:255',
-            'fecha'=>'required|date',
-            'marca'=>'required|max:255'
+            'modelo' => 'required|max:255',
+            'fecha' => 'required|date',
+            'marca' => 'required|max:255',
+            'ram'=>'max:255',
+            'encargado'=>'max:255',
+            'so'=>'max:255',
+            'codigo_inventario'=>'max:255',
+            'almacenamiento'=>'max:255',
+        ], $message = [
+            'required' => 'Este campo es obligatorio',
+            'max' => 'Maximo de 255 caracteres'
         ]);
 
-        $computador->marca = $req->marca;
-        $computador->so = $req->so;
-        $computador->fecha = $req->fecha;
-        $computador->encargado = $req->encargado;
-        $computador->modelo = $req->modelo;
-        $computador->ram = $req->ram;
-        $computador->almacenamiento = $req->almacenamiento;
-        $computador->codigo_inventario = $req->codigo_inventario;
+        try {
+            $computador->marca = $req->marca;
+            $computador->so = $req->so;
+            $computador->fecha = $req->fecha;
+            $computador->encargado = $req->encargado;
+            $computador->modelo = $req->modelo;
+            $computador->ram = $req->ram;
+            $computador->almacenamiento = $req->almacenamiento;
+            $computador->codigo_inventario = $req->codigo_inventario;
 
-        $computador->save();
-        if ($req->newOficina) {
-            $of = new Oficina;
-            $of->nombre = $req->newOficina;
-            $of->save();
-            $computador->oficinas()->attach($of);
-        }
-        if ($req->newUso) {
-            $newUso = new TipoUso;
-            $newUso->nombre = $req->newUso;
-            $newUso->save();
-            $computador->tipo_usos()->attach($newUso);
-        }
-        if ($req->oficinas) {
-            foreach ($req->oficinas as $oficina_id) {
-                # code...
-                $oficina = Oficina::find($oficina_id);
-
-                $computador->oficinas()->attach($oficina);
+            $computador->save();
+            if ($req->newOficina) {
+                $of = new Oficina;
+                $of->nombre = $req->newOficina;
+                $of->save();
+                $computador->oficinas()->attach($of);
             }
-        }
-        if ($req->tipo_usos) {
-            foreach ($req->tipo_usos as $usos_id) {
-                # code...
-                $tipo_uso = TipoUso::find($usos_id);
-                $computador->tipo_usos()->attach($tipo_uso);
+            if ($req->newUso) {
+                $newUso = new TipoUso;
+                $newUso->nombre = $req->newUso;
+                $newUso->save();
+                $computador->tipo_usos()->attach($newUso);
             }
+            if ($req->oficinas) {
+                foreach ($req->oficinas as $oficina_id) {
+                    # code...
+                    $oficina = Oficina::find($oficina_id);
+
+                    $computador->oficinas()->attach($oficina);
+                }
+            }
+            if ($req->tipo_usos) {
+                foreach ($req->tipo_usos as $usos_id) {
+                    # code...
+                    $tipo_uso = TipoUso::find($usos_id);
+                    $computador->tipo_usos()->attach($tipo_uso);
+                }
+            }
+            if ($req->comentario) {
+
+                $comentario = new Comentario;
+                $comentario->computador()->associate($computador);
+                $comentario->comentario = $req->comentario;
+                $comentario->save();
+            }
+
+
+            return redirect(route('show', $computador->id));
+        } catch (Exception $e) {
+            return view('error.show')->with('message', $e->getMessage());
         }
-        if ($req->comentario) {
-
-            $comentario = new Comentario;
-            $comentario->computador()->associate($computador);
-            $comentario->comentario = $req->comentario;
-            $comentario->save();
-        }
-
-
-        return redirect(route('show', $computador->id));
     }
 
     /**
@@ -193,11 +205,19 @@ class ComputadorController extends Controller
         if ($computador == null) {
             abort(404);
         }
-        
+
         $req->validate([
-            'modelo'=>'required|max:255',
-            'fecha'=>'required|date',
-            'marca'=>'required|max:255'
+            'modelo' => 'required|max:255',
+            'fecha' => 'required|date',
+            'marca' => 'required|max:255',
+            'ram'=>'max:255',
+            'encargado'=>'max:255',
+            'so'=>'max:255',
+            'codigo_inventario'=>'max:255',
+            'almacenamiento'=>'max:255',
+        ], $message = [
+            'required' => 'Este campo es obligatorio',
+            'max' => 'Maximo de 255 caracteres'
         ]);
 
         try {
