@@ -17,7 +17,6 @@ class CreateComputadorOficina extends Migration
             $table->unsignedBigInteger('computador_id')->index();
             $table->unsignedBigInteger('oficina_id')->index();
             $table->timestamps();
-
             $table->foreign('computador_id')->references('id')->on('computadores')->ondelete('cascade');
             $table->foreign('oficina_id')->references('id')->on('oficinas')->ondelete('cascade');
 

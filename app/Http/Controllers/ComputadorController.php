@@ -299,7 +299,7 @@ class ComputadorController extends Controller
     {
 
         $comentario = Comentario::find($id);
-        $comentario->delete();
+        $comentario->estado=false;
         return redirect(route('show', $computer_id));
     }
 

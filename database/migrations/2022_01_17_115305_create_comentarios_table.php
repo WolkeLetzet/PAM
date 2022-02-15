@@ -18,6 +18,7 @@ class CreateComentariosTable extends Migration
             $table->bigInteger('computador_id')->unsigned();
             $table->string('comentario');
             $table->timestamps();
+            $table->boolean('estado')->default(true);
 
             $table->foreign('computador_id')->references('id')->on('computadores');
 
